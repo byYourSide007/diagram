@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>overla_square</title>
+    <!--
+        canvas 就是设定一块大小固定的画布
+        ctx 获取上下文对象
+
+        ctx.fillStyle 就是填充样式，后面设置 rgb 属性
+        ctx.fillRect 前两个参数是 x 和 y 轴的位置，第三和第四个参数是宽度和高度
+
+
+
+    -->
+</head>
+<body>
+<canvas id="second" width="150" height="150"></canvas>
+<script>
+    let second = document.getElementById('second')
+    const ctx = second.getContext('2d');
+
+    // 绘制图形
+    ctx.fillStyle = "rgb(200, 0, 0)";
+    ctx.fillRect(10, 10, 55, 50);
+
+    // 绘制第二个图形
+    ctx.fillStyle = "rgb(0, 0, 200, 0.5)"
+    ctx.fillRect(30, 30, 50, 55)
+
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Test</title>
+        <style>
+            canvas {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="first"  width="300" height="300" onload="drow()"></canvas>
+        <script>
+            // function drow() {
+          const first = document.getElementById('first') // 获取上方 canvas 标签
+          const ctx = first.getContext('2d') // 获取上下文，由于在这里还没有操作，目前在 HTML 页面中显示的内容还是由 STYLE 控制
+          // 绘制一所房子
+          ctx.lineWidth = 10; // 设置线条宽度
+
+          // 绘制墙壁
+          ctx.strokeRect(75, 140, 150, 110)
+
+          // 绘制门
+          ctx.fillRect(130, 190, 40, 60)
+
+          // 绘制房顶
+          ctx.beginPath() // 开始绘制
+          ctx.moveTo(50, 140)
+          ctx.lineTo(150, 60)
+          ctx.lineTo(250, 140)
+          ctx.closePath() // 结束绘制
+          ctx.stroke()
+            // }
+        </script>
+    </body>
+</html>

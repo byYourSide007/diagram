@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas绘制电气图</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="600" height="400"></canvas>
+
+<script>
+  const canvas = document.getElementById('myCanvas');
+  const ctx = canvas.getContext('2d');
+
+  // 绘制直线
+  function drawLine(x1, y1, x2, y2) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+  }
+
+  // 绘制电源符号
+  function drawPowerSymbol(x, y) {
+    const width = 20, height = 10;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + width, y + height / 2);
+    ctx.lineTo(x, y + height);
+    ctx.stroke();
+  }
+
+  // 绘制电阻符号
+  function drawResistorSymbol(x, y) {
+    const width = 40, height = 20;
+    ctx.beginPath();
+    ctx.moveTo(x, y + height / 2);
+    ctx.lineTo(x + width / 3, y);
+    ctx.lineTo(x + width / 3 * 2, y + height);
+    ctx.lineTo(x + width, y + height / 2);
+    ctx.stroke();
+  }
+
+  // // 绘制电路
+  drawPowerSymbol(50, 150);              // 绘制电源符号
+  drawLine(70, 155, 170, 155);           // 绘制连接电源的直线
+  drawLine(170, 155, 180, 125);          // 绘制连接电阻的直线
+  drawResistorSymbol(180, 115);          // 绘制电阻符号
+  drawLine(220, 125, 230, 155);          // 绘制连接电阻和LED的直线
+  drawLine(230, 155, 270, 155);          // 绘制连接LED的直线
+  drawLine(270, 155, 280, 115);          // 绘制连接GND的直线
+  drawLine(50, 165, 280, 165);           // 绘制电路的底线
+  drawLine(50, 145, 50, 165);            // 绘制电源的连接线
+  drawLine(280, 105, 280, 125);          // 绘制GND的连接线
+</script>
+</body>
+</html>
