@@ -7,17 +7,9 @@
         <!-- 展示电气原件 -->
         <div class="electrical_components">
             <!-- 第一组电气元件 -->
-<!--            {{transformer}}-->
-<!--            {{sceneFunc}}-->
-<!--            <collapse-list title="基础原件"-->
-<!--                           :componentList="transformer"-->
-<!--                            :component-list-fun="transformer[0].sceneFunc">-->
-
             <collapse-list title="基础原件"
-                           :componentList="config"/>
-
-            <collapse-list title="基础原件"
-                           :componentList="transformer[0]"/>
+                           :componentList="transformer"/>
+<!--                           :componentList="transformer[0]"/>-->
 
 <!--            <collapse-list-item>-->
 <!--                <template #image><img src="@/assets/electricalComps/1.png" alt="#"></template>-->
@@ -98,7 +90,15 @@
           const drawSpecific = new DrawCanvas (0, 30, "#000")
           // 绘制变压器
           let transformer = drawSpecific.drawCoil()
+          transformer.draggable = false
           this.transformer[0] = transformer
+
+          const drawSpecific2 = new DrawCanvas (80, 30, "#000")
+          // 绘制变压器
+          let transformer2 = drawSpecific2.drawCoil()
+          transformer2.draggable = false
+
+          this.transformer[1] = transformer2
         }
     },
     created() {

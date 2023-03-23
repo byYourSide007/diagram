@@ -13,62 +13,16 @@
         <div :class="['list_content', {'is_active_class': is_active}]">
             <v-stage :config="config">
                 <v-layer ref="layer">
-                    <v-shape :config="componentList"></v-shape>
+<!--                    <v-shape v-for="item in componentList"-->
+<!--                            :config="item"/>-->
+                    <div v-for="(item, index) in componentList" :key="index">
+                        <v-shape :config="item"/>
+                    </div>
 
 <!--                    <v-shape :config="{-->
 <!--                      // ...componentList[0],-->
 <!--                      sceneFunc: componentListFun-->
 <!--                    }"></v-shape>-->
-
-<!--                    <v-shape :config="{-->
-<!--                        sceneFunc: function (context, shape) {-->
-<!--                            const x = 0;-->
-<!--                            const y = 0;-->
-<!--                            // 绘制前面的横线-->
-<!--                            context.beginPath ()-->
-<!--                            // context.strokeStyle = color-->
-<!--                            context.moveTo (x, y)-->
-<!--                            context.lineTo (x + 30, y)-->
-<!--                            context.stroke ()-->
-<!--                            // 绘制线圈的中间矩形-->
-<!--                            context.beginPath ()-->
-<!--                            context.moveTo (x + 22, y - 30)-->
-<!--                            context.lineTo (x + 50, y - 30)-->
-<!--                            context.lineTo (x + 50, y + 30)-->
-<!--                            context.lineTo (x + 22, y + 30)-->
-<!--                            context.closePath ()-->
-<!--                            context.stroke ()-->
-<!--                            // 绘制内部线条-->
-<!--                            context.beginPath ()-->
-<!--                            context.moveTo (x + 30, y)-->
-<!--                            context.lineTo (x + 30, y + 15)-->
-<!--                            context.lineTo (x + 42, y + 15)-->
-<!--                            context.lineTo (x + 42, y)-->
-<!--                            context.lineTo (x + 50, y)-->
-<!--                            context.lineTo (x + 72, y)-->
-<!--                            context.stroke ()-->
-<!--                            // 绘制外层描边-->
-<!--                            context.beginPath ()-->
-<!--                            context.moveTo (x, y - 30)-->
-<!--                            context.lineTo (x + 72, y - 30)-->
-<!--                            context.lineTo (x + 72, y + 30)-->
-<!--                            context.lineTo (x, y + 30)-->
-<!--                            context.closePath ()-->
-<!--                            context.fillStrokeShape (shape)-->
-<!--                        },-->
-<!--                        offsetX: 0,-->
-<!--                        offsetY: 0,-->
-<!--                        x: 20,-->
-<!--                        y: 50,-->
-<!--                        width: 72,-->
-<!--                        height: 30,-->
-<!--                        fill: 'transparent',-->
-<!--                        stroke: 'transparent',-->
-<!--                        strokeWidth: 2,-->
-<!--                        funcName: 'drawCoil',-->
-<!--                        name: 'coil',-->
-<!--                        draggable: true,-->
-<!--                    }"/>-->
 
                 </v-layer>
             </v-stage>
@@ -89,12 +43,6 @@
         },
         // 控制列表内容的显示和隐藏，默认不显示
         is_active: false,
-      }
-    },
-    computed: {
-      sceneComputed() {
-        // return this.componentListFun ? "传入":"未传入"  // 传入
-        return typeof this.componentListFun // function
       }
     },
     props: {
