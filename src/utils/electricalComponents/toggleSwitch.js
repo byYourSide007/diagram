@@ -2375,16 +2375,13 @@ class DrawCanvas {
         // 绘制短横线
         context.beginPath ()
         context.strokeStyle = '#c7c90c'
-        // context.moveTo (x + 35, y)
         context.moveTo (x + 15, y)
         context.lineTo (x + 45, y)
         context.stroke ()
         // 绘制x号
         context.beginPath ()
         context.strokeStyle = '#00ff00'
-        // context.moveTo (x + 61, y - 4)
         context.moveTo (x + 41, y - 4)
-        // context.lineTo (x + 69, y + 4)
         context.lineTo (x + 49, y + 4)
         context.stroke ()
         context.beginPath ()
@@ -2393,31 +2390,23 @@ class DrawCanvas {
         context.stroke ()
         // 绘制斜线
         context.beginPath ()
-        // context.moveTo (x + 65, y + 20)
         context.moveTo (x + 35, y + 25)
-        // context.lineTo (x + 105, y)
         context.lineTo (x + 65, y)
         context.stroke ()
         // 绘制斜线后面的短横线
         context.beginPath ()
         context.strokeStyle = '#c7c90c'
-        // context.moveTo (x + 105, y)
         context.moveTo (x + 65, y)
-        // context.lineTo (x + 135, y)
         context.lineTo (x + 95, y)
         context.stroke ()
         //绘制小箭头
         context.beginPath ()
         context.strokeStyle = '#00ff00'
-        // context.moveTo (x + 135 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
         context.moveTo (x + 95 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
-        // context.lineTo (x + 135, y)
         context.lineTo (x + 95, y)
-        // context.lineTo (x + 135 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
         context.lineTo (x + 95 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
         context.stroke ()
         context.beginPath ()
-        // context.moveTo (x + 140 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
         context.moveTo (x + 100 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
         context.lineTo (x + 100, y)
         context.lineTo (x + 100 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
@@ -2425,9 +2414,7 @@ class DrawCanvas {
         // 绘制最后的短横线
         context.beginPath ()
         context.strokeStyle = '#c7c90c'
-        // context.moveTo (x + 140, y)
         context.moveTo (x + 100, y)
-        // context.lineTo (x + 170, y)
         context.lineTo (x + 130, y)
         context.stroke ()
         // 绘制外层的描边

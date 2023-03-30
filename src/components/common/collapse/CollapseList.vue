@@ -19,7 +19,6 @@
                 </v-layer>
             </v-stage>
         </div>
-        {{componentList}}
     </div>
 </template>
 
