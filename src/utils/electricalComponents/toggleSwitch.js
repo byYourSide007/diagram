@@ -2260,88 +2260,88 @@ class DrawCanvas {
    * @description 绘制电容器组
    * @returns {{strokeWidth: number, draggable: boolean, name: string, fill: string, sceneFunc: sceneFunc, stroke: string}}
    */
-  // drawCapacitorBank() {
-  //   const _y = this.y;
-  //   const _x = this.x
-  //   return {
-  //     color: color,
-  //     sceneFunc: function (context, shape) {
-  //       const x = 0;
-  //       const y = 50;
-  //       // 绘制第一条残缺的边
-  //       context.beginPath ()
-  //       context.strokeStyle = color
-  //       context.moveTo (x, y)
-  //       context.lineTo (x + 20, y)
-  //       context.stroke ()
-  //       // 绘制下面横线的电容
-  //       context.beginPath ()
-  //       context.moveTo (x + 20, y - 8)
-  //       context.lineTo (x + 20, y + 8)
-  //       context.stroke ()
-  //       context.beginPath ()
-  //       context.moveTo (x + 30, y - 8)
-  //       context.lineTo (x + 30, y + 8)
-  //       context.stroke ()
-  //       // 绘制右下角的线条
-  //       context.beginPath ()
-  //       context.moveTo (x + 30, y)
-  //       context.lineTo (x + 50, y)
-  //       context.lineTo (x + 40, y - 10 * Math.sqrt (3))
-  //       context.stroke ()
-  //       // 绘制右边线条上的电容
-  //       context.beginPath ()
-  //       context.moveTo (x + 40 + 4 * Math.sqrt (3), y - 4 - 10 * Math.sqrt (3))
-  //       context.lineTo (x + 40 - 4 * Math.sqrt (3), y + 4 - 10 * Math.sqrt (3))
-  //       context.stroke ()
-  //       context.beginPath ()
-  //       context.moveTo (x + 35 + 4 * Math.sqrt (3), y - 4 - 15 * Math.sqrt (3))
-  //       context.lineTo (x + 35 - 4 * Math.sqrt (3), y + 4 - 15 * Math.sqrt (3))
-  //       context.stroke ()
-  //       // 绘制右上角的线条
-  //       context.beginPath ()
-  //       context.moveTo (x + 35, y - 15 * Math.sqrt (3))
-  //       context.lineTo (x + 25, y - 25 * Math.sqrt (3))
-  //       context.lineTo (x + 15, y - 15 * Math.sqrt (3))
-  //       context.stroke ()
-  //       //绘制左线条上的电容
-  //       context.beginPath ()
-  //       context.moveTo (x + 15 + 4 * Math.sqrt (3), y + 4 - 15 * Math.sqrt (3))
-  //       context.lineTo (x + 15 - 4 * Math.sqrt (3), y - 4 - 15 * Math.sqrt (3))
-  //       context.stroke ()
-  //       context.beginPath ()
-  //       context.moveTo (x + 10 + 4 * Math.sqrt (3), y + 4 - 10 * Math.sqrt (3))
-  //       context.lineTo (x + 10 - 4 * Math.sqrt (3), y - 4 - 10 * Math.sqrt (3))
-  //       context.stroke ()
-  //       context.beginPath ()
-  //       // 绘制左下角的线条
-  //       context.beginPath ()
-  //       context.moveTo (x + 10, y - 10 * Math.sqrt (3))
-  //       context.lineTo (x, y)
-  //       context.stroke ()
-  //       // 绘制外层描边
-  //       context.beginPath ()
-  //       context.moveTo (x, y - 100)
-  //       context.lineTo (x + 100, y - 100)
-  //       context.lineTo (x + 100, y + 100)
-  //       context.lineTo (x, y + 100)
-  //       context.closePath ()
-  //       context.fillStrokeShape (shape)
-  //     },
-  //     offsetX: 0,
-  //     offsetY: 0,
-  //     x: _x,
-  //     y: _y,
-  //     width: 50,
-  //     height: 50,
-  //     fill: 'transparent',
-  //     stroke: 'transparent',
-  //     strokeWidth: 2,
-  //     name: 'contactorBank',
-  //     funcName: 'drawCapacitorBank',
-  //     draggable: true,
-  //   }
-  // }
+  drawCapacitorBank() {
+    const _y = this.y;
+    const _x = this.x
+    return {
+      color: this.color,
+      sceneFunc: function (context, shape) {
+        const x = 0;
+        const y = 50;
+        // 绘制第一条残缺的边
+        context.beginPath ()
+        context.strokeStyle = this.color
+        context.moveTo (x, y)
+        context.lineTo (x + 20, y)
+        context.stroke ()
+        // 绘制下面横线的电容
+        context.beginPath ()
+        context.moveTo (x + 20, y - 8)
+        context.lineTo (x + 20, y + 8)
+        context.stroke ()
+        context.beginPath ()
+        context.moveTo (x + 30, y - 8)
+        context.lineTo (x + 30, y + 8)
+        context.stroke ()
+        // 绘制右下角的线条
+        context.beginPath ()
+        context.moveTo (x + 30, y)
+        context.lineTo (x + 50, y)
+        context.lineTo (x + 40, y - 10 * Math.sqrt (3))
+        context.stroke ()
+        // 绘制右边线条上的电容
+        context.beginPath ()
+        context.moveTo (x + 40 + 4 * Math.sqrt (3), y - 4 - 10 * Math.sqrt (3))
+        context.lineTo (x + 40 - 4 * Math.sqrt (3), y + 4 - 10 * Math.sqrt (3))
+        context.stroke ()
+        context.beginPath ()
+        context.moveTo (x + 35 + 4 * Math.sqrt (3), y - 4 - 15 * Math.sqrt (3))
+        context.lineTo (x + 35 - 4 * Math.sqrt (3), y + 4 - 15 * Math.sqrt (3))
+        context.stroke ()
+        // 绘制右上角的线条
+        context.beginPath ()
+        context.moveTo (x + 35, y - 15 * Math.sqrt (3))
+        context.lineTo (x + 25, y - 25 * Math.sqrt (3))
+        context.lineTo (x + 15, y - 15 * Math.sqrt (3))
+        context.stroke ()
+        //绘制左线条上的电容
+        context.beginPath ()
+        context.moveTo (x + 15 + 4 * Math.sqrt (3), y + 4 - 15 * Math.sqrt (3))
+        context.lineTo (x + 15 - 4 * Math.sqrt (3), y - 4 - 15 * Math.sqrt (3))
+        context.stroke ()
+        context.beginPath ()
+        context.moveTo (x + 10 + 4 * Math.sqrt (3), y + 4 - 10 * Math.sqrt (3))
+        context.lineTo (x + 10 - 4 * Math.sqrt (3), y - 4 - 10 * Math.sqrt (3))
+        context.stroke ()
+        context.beginPath ()
+        // 绘制左下角的线条
+        context.beginPath ()
+        context.moveTo (x + 10, y - 10 * Math.sqrt (3))
+        context.lineTo (x, y)
+        context.stroke ()
+        // 绘制外层描边
+        context.beginPath ()
+        context.moveTo (x, y - 100)
+        context.lineTo (x + 100, y - 100)
+        context.lineTo (x + 100, y + 100)
+        context.lineTo (x, y + 100)
+        context.closePath ()
+        context.fillStrokeShape (shape)
+      },
+      offsetX: 0,
+      offsetY: 0,
+      x: _x,
+      y: _y,
+      width: 50,
+      height: 50,
+      fill: 'transparent',
+      stroke: 'transparent',
+      strokeWidth: 2,
+      name: 'contactorBank',
+      funcName: 'drawCapacitorBank',
+      draggable: true,
+    }
+  }
 
   /**
    * @description 绘制抽屉式段路线断开状态
@@ -2358,64 +2358,77 @@ class DrawCanvas {
         context.beginPath ()
         context.strokeStyle = '#c7c90c'
         context.moveTo (x, y)
-        context.lineTo (x + 30, y)
+        context.lineTo (x + 10, y)
         context.stroke ()
         // 绘制小角
         context.beginPath ()
         context.strokeStyle = '#00ff00'
-        context.moveTo (x + 30 + 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
-        context.lineTo (x + 30, y)
-        context.lineTo (x + 30 + 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        context.moveTo (x + 10 + 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        context.lineTo (x + 10, y)
+        context.lineTo (x + 10 + 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
         context.stroke ()
         context.beginPath ()
-        context.moveTo (x + 35 + 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
-        context.lineTo (x + 35, y)
-        context.lineTo (x + 35 + 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        context.moveTo (x + 15 + 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        context.lineTo (x + 15, y)
+        context.lineTo (x + 15 + 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
         context.stroke ()
         // 绘制短横线
         context.beginPath ()
         context.strokeStyle = '#c7c90c'
-        context.moveTo (x + 35, y)
-        context.lineTo (x + 65, y)
+        // context.moveTo (x + 35, y)
+        context.moveTo (x + 15, y)
+        context.lineTo (x + 45, y)
         context.stroke ()
         // 绘制x号
         context.beginPath ()
         context.strokeStyle = '#00ff00'
-        context.moveTo (x + 61, y - 4)
-        context.lineTo (x + 69, y + 4)
+        // context.moveTo (x + 61, y - 4)
+        context.moveTo (x + 41, y - 4)
+        // context.lineTo (x + 69, y + 4)
+        context.lineTo (x + 49, y + 4)
         context.stroke ()
         context.beginPath ()
-        context.moveTo (x + 69, y - 4)
-        context.lineTo (x + 61, y + 4)
+        context.moveTo (x + 49, y - 4)
+        context.lineTo (x + 41, y + 4)
         context.stroke ()
         // 绘制斜线
         context.beginPath ()
-        context.moveTo (x + 65, y + 20)
-        context.lineTo (x + 105, y)
+        // context.moveTo (x + 65, y + 20)
+        context.moveTo (x + 35, y + 25)
+        // context.lineTo (x + 105, y)
+        context.lineTo (x + 65, y)
         context.stroke ()
         // 绘制斜线后面的短横线
         context.beginPath ()
         context.strokeStyle = '#c7c90c'
-        context.moveTo (x + 105, y)
-        context.lineTo (x + 135, y)
+        // context.moveTo (x + 105, y)
+        context.moveTo (x + 65, y)
+        // context.lineTo (x + 135, y)
+        context.lineTo (x + 95, y)
         context.stroke ()
         //绘制小箭头
         context.beginPath ()
         context.strokeStyle = '#00ff00'
-        context.moveTo (x + 135 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
-        context.lineTo (x + 135, y)
-        context.lineTo (x + 135 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        // context.moveTo (x + 135 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        context.moveTo (x + 95 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        // context.lineTo (x + 135, y)
+        context.lineTo (x + 95, y)
+        // context.lineTo (x + 135 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        context.lineTo (x + 95 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
         context.stroke ()
         context.beginPath ()
-        context.moveTo (x + 140 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
-        context.lineTo (x + 140, y)
-        context.lineTo (x + 140 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        // context.moveTo (x + 140 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        context.moveTo (x + 100 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        context.lineTo (x + 100, y)
+        context.lineTo (x + 100 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
         context.stroke ()
         // 绘制最后的短横线
         context.beginPath ()
         context.strokeStyle = '#c7c90c'
-        context.moveTo (x + 140, y)
-        context.lineTo (x + 170, y)
+        // context.moveTo (x + 140, y)
+        context.moveTo (x + 100, y)
+        // context.lineTo (x + 170, y)
+        context.lineTo (x + 130, y)
         context.stroke ()
         // 绘制外层的描边
         context.beginPath ()
@@ -2459,53 +2472,70 @@ class DrawCanvas {
         context.beginPath ()
         context.strokeStyle = 'red'
         context.moveTo (x, y)
-        context.lineTo (x + 30, y)
+        // context.lineTo (x + 30, y)
+        context.lineTo (x + 10, y)
         context.stroke ()
         // 绘制小角
         context.beginPath ()
-        context.moveTo (x + 30 + 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
-        context.lineTo (x + 30, y)
-        context.lineTo (x + 30 + 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        // context.moveTo (x + 30 + 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        context.moveTo (x + 10 + 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        // context.lineTo (x + 30, y)
+        context.lineTo (x + 10, y)
+        // context.lineTo (x + 30 + 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        context.lineTo (x + 10 + 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
         context.stroke ()
         context.beginPath ()
-        context.moveTo (x + 35 + 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
-        context.lineTo (x + 35, y)
-        context.lineTo (x + 35 + 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        // context.moveTo (x + 35 + 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        context.moveTo (x + 15 + 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        // context.lineTo (x + 35, y)
+        context.lineTo (x + 15, y)
+        // context.lineTo (x + 35 + 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        context.lineTo (x + 15 + 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
         context.stroke ()
         // 绘制短横线
         context.beginPath ()
-        context.moveTo (x + 35, y)
-        context.lineTo (x + 65, y)
+        context.moveTo (x + 15, y)
+        context.lineTo (x + 31, y)
         context.stroke ()
         // 绘制x号
         context.beginPath ()
-        context.moveTo (x + 61, y - 4)
-        context.lineTo (x + 69, y + 4)
+        context.moveTo (x + 31, y - 4)
+        context.lineTo (x + 39, y + 4)
         context.stroke ()
         context.beginPath ()
-        context.moveTo (x + 69, y - 4)
-        context.lineTo (x + 61, y + 4)
+        context.moveTo (x + 39, y - 4)
+        context.lineTo (x + 31, y + 4)
         context.stroke ()
         // 绘制斜线
         context.beginPath ()
-        context.moveTo (x + 65, y)
-        context.lineTo (x + 135, y)
+        // context.moveTo (x + 45, y)
+        context.moveTo (x + 31, y)
+        // context.lineTo (x + 55, y)
+        context.lineTo (x + 55, y)
         context.stroke ()
         //绘制小箭头
         context.beginPath ()
-        context.moveTo (x + 135 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
-        context.lineTo (x + 135, y)
-        context.lineTo (x + 135 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        // context.moveTo (x + 115 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        context.moveTo (x + 55 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        // context.lineTo (x + 115, y)
+        context.lineTo (x + 55, y)
+        // context.lineTo (x + 115 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        context.lineTo (x + 55 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
         context.stroke ()
         context.beginPath ()
-        context.moveTo (x + 140 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
-        context.lineTo (x + 140, y)
-        context.lineTo (x + 140 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        // context.moveTo (x + 120 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        context.moveTo (x + 60 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        // context.lineTo (x + 120, y)
+        context.lineTo (x + 60, y)
+        // context.lineTo (x + 120 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        context.lineTo (x + 60 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
         context.stroke ()
         // 绘制最后的短横线
         context.beginPath ()
-        context.moveTo (x + 140, y)
-        context.lineTo (x + 170, y)
+        // context.moveTo (x + 120, y)
+        context.moveTo (x + 60, y)
+        // context.lineTo (x + 150, y)
+        context.lineTo (x + 80, y)
         context.stroke ()
         // 绘制外层的描边
         context.beginPath ()

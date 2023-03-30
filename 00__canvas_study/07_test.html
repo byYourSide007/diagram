@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+  for (let i = 0; i < allPipes.length; i++) {
+    if (checkCollide(bird, allPipes[i].children[0]) || checkCollide(bird, allPipes[i].children[1])) {
+      console.log('over');
+      gameOver()
+    }
+  }
+
+  function checkCollide(ele1, ele2) {
+    // 水平最小距离碰撞
+    let xLeft = ele2.offsetParent.offsetLeft - ele1.offsetWidth
+    // 水平最大距离碰撞
+    let xRight = ele2.offsetParent.offsetLeft + ele2.offsetWidth
+
+    // 垂直最小距离碰撞
+    let yTop = ele2.offsetTop - ele1.offsetHeight
+    // 垂直最大距离碰撞
+    let yBottom = ele2.offsetTop + ele2.offsetHeight
+  }
+</script>
+</body>
+</html>

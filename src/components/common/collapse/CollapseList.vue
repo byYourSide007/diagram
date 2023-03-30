@@ -11,22 +11,15 @@
         </div>
         <!-- 内容区域 -->
         <div :class="['list_content', {'is_active_class': is_active}]">
-            <v-stage :config="config">
+            <v-stage :config="config" ref="stage_box">
                 <v-layer ref="layer">
-<!--                    <v-shape v-for="item in componentList"-->
-<!--                            :config="item"/>-->
                     <div v-for="(item, index) in componentList" :key="index">
                         <v-shape :config="item"/>
                     </div>
-
-<!--                    <v-shape :config="{-->
-<!--                      // ...componentList[0],-->
-<!--                      sceneFunc: componentListFun-->
-<!--                    }"></v-shape>-->
-
                 </v-layer>
             </v-stage>
         </div>
+        {{componentList}}
     </div>
 </template>
 
@@ -35,14 +28,15 @@
     name: "CollapseList",
     data(){
       return {
-
+        stage_height: 200, // 存放当前 canvas 图形的 stage 的高度
         // 控制 konva 展示舞台的相关配置
         config: {
           width: 363,
-          height: 100
+          height: this.height_stage, // 由父组件传递过来的内容
         },
         // 控制列表内容的显示和隐藏，默认不显示
-        is_active: false,
+        // is_active: false,
+        is_active: true, // 测试用
       }
     },
     props: {
@@ -57,21 +51,19 @@
         type: Array,
         required: true
       },
-      // 函数数据
-      componentListFun: {
-        type: Function,
-        required: true
+      // 当前列表所需要的高度
+      height_stage: {
+        type: Number,
+        required: true,
       }
     },
     methods: {
       // 当点击列表项的标题所触发的函数
       titleClick() {
         this.is_active = !this.is_active;
+        this.stage_height = this.$refs.stage_box.getStage().container().getBoundingClientRect().height;
+        console.log(this.stage_height);
       },
-    },
-    created() {
-      // console.dir(this.componentList[0].sceneFunc);
-      console.dir(this.componentListFun)
     },
   }
 </script>
@@ -79,8 +71,6 @@
 <style scoped lang="scss">
     .collapse_list {
         position: relative;
-        /*width: 100%;*/
-        width: 363px;
         /* 标题 */
         .list_title {
             /* 自身定位 */
@@ -100,7 +90,6 @@
             max-height: 0; /* 如果使用 height ，则无法实现平滑滚动*/
             transition: 0.2s;
             overflow: hidden;
-
             /* 定位子元素 */
             display: flex;
             flex-flow: row wrap;
