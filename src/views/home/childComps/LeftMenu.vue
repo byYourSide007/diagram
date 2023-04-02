@@ -58,6 +58,9 @@
       drawPower() {
 
       },
+      // 绘制电阻
+
+      // 绘制保险丝
 
       // 绘制仪器
       drawInstruments() {
