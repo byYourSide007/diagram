@@ -1,5 +1,5 @@
 <template>
-    <div class="collapse_list">
+    <div class="collapse_list" >
         <!-- 列表项标题 -->
         <div class="list_title" @click="titleClick">
             <!-- 左侧显示列表展开或闭合的状态的图形 -->
@@ -10,11 +10,11 @@
             <span>{{title}}</span>
         </div>
         <!-- 内容区域 -->
-        <div :class="['list_content', {'is_active_class': is_active}]">
-            <v-stage :config="config" ref="stage_box">
-                <v-layer ref="layer">
-                    <div v-for="(item, index) in componentList" :key="index">
-                        <v-shape :config="item"/>
+        <div :class="['list_content', {'is_active_class': is_active}]" >
+            <v-stage :config="config" ref="stage_box" >
+                <v-layer ref="layer" >
+                    <div v-for="(item, index) in componentList" :key="index" >
+                        <v-shape :config="item" @click="showIt"/>
                     </div>
                 </v-layer>
             </v-stage>
@@ -63,7 +63,12 @@
         this.stage_height = this.$refs.stage_box.getStage().container().getBoundingClientRect().height;
         console.log(this.stage_height);
       },
+      showIt(e) {
+        const target = e.target;
+        console.log(target.attrs.funcName);
+      }
     },
+
   }
 </script>
 
@@ -89,6 +94,7 @@
             max-height: 0; /* 如果使用 height ，则无法实现平滑滚动*/
             transition: 0.2s;
             overflow: hidden;
+            background-color: #f7f7f7;
             /* 定位子元素 */
             display: flex;
             flex-flow: row wrap;

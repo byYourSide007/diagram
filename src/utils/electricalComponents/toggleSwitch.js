@@ -25,7 +25,7 @@ class DrawCanvas {
         context.stroke ()
         // 绘制矩形
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x + 10, y - 5)
         context.lineTo (x + 50, y - 5)
         context.lineTo (x + 50, y + 5)
@@ -40,7 +40,7 @@ class DrawCanvas {
         context.lineTo (x, y + 5)
         context.closePath ()
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         // 绘制第一个小圆圈
         context.beginPath ()
         context.arc (x + 70, y, 8, 0, Math.PI * 2)
@@ -93,7 +93,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制短横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 5, y)
         context.stroke ()
@@ -175,7 +175,7 @@ class DrawCanvas {
         context.stroke ()
         // 绘制小角
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x + 10 + 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
         context.lineTo (x + 10, y)
         context.lineTo (x + 10 + 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
@@ -199,7 +199,7 @@ class DrawCanvas {
         context.stroke ()
         // 绘制矩形
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.lineWidth = 3
         context.moveTo (x + 50, y - 7.5)
         context.lineTo (x + 80, y - 7.5)
@@ -216,7 +216,7 @@ class DrawCanvas {
         context.stroke ()
         //绘制小箭头
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x + 115 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
         context.lineTo (x + 115, y)
         context.lineTo (x + 115 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
@@ -270,7 +270,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制三个圆圈
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.arc (x + 20, y - 20, 20, 0, Math.PI * 2)
         context.stroke ()
         context.beginPath ()
@@ -285,7 +285,7 @@ class DrawCanvas {
         context.stroke ()
         // 绘制做下的圆圈
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.arc (x - 5, y + 5, 20, 0, Math.PI * 2)
         context.stroke ()
         context.beginPath ()
@@ -300,7 +300,7 @@ class DrawCanvas {
         context.stroke ()
         // 绘制右下的圆圈
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.arc (x + 35, y + 5, 20, 0, Math.PI * 2)
         context.stroke ()
         // 绘制倒三角形
@@ -348,7 +348,7 @@ class DrawCanvas {
         const x = 0;
         const y = 0;
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 100, y)
         context.stroke ()
@@ -400,7 +400,7 @@ class DrawCanvas {
         context.stroke ()
         // 绘制短横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x + 10, y - 10 * Math.sqrt (3) + 10)
         context.lineTo (x + 10, y + 10 * Math.sqrt (3) + 5)
         context.stroke ()
@@ -439,7 +439,7 @@ class DrawCanvas {
         const y = 0
         // 绘制短斜线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 10, y + 10 * Math.sqrt (3))
         context.stroke ()
@@ -495,7 +495,7 @@ class DrawCanvas {
         // const x = 0;
         // const y = 0;
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         // 绘制第一跟小线条
         context.moveTo (0, 0)
         context.lineTo (10, 0)
@@ -1219,7 +1219,7 @@ class DrawCanvas {
         const y = 0;
         //绘制第一跟线条
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x + 10, y - 20)
         context.lineTo (x + 10, y + 20)
         context.stroke ()
@@ -1280,7 +1280,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 20, y)
         context.stroke ()
@@ -1338,7 +1338,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制短横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 20, y)
         context.stroke ()
@@ -1395,7 +1395,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制第一条线
         context.beginPath ();
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y);
         context.lineTo (x + 20, y);
         context.stroke ()
@@ -1455,7 +1455,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制上面的横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 40, y)
         context.stroke ()
@@ -1513,7 +1513,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制短横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 20, y)
         context.stroke ()
@@ -1908,7 +1908,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制短横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 10, y)
         context.stroke ()
@@ -1964,7 +1964,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制实心小箭头
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 20, y)
         context.stroke ()
@@ -2029,7 +2029,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 20, y)
         context.stroke ()
@@ -2088,7 +2088,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制短横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 60, y)
         context.stroke ()
@@ -2144,7 +2144,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制短横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 20, y)
         context.stroke ()
@@ -2210,7 +2210,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制前面的横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 30, y)
         context.stroke ()
@@ -2356,12 +2356,14 @@ class DrawCanvas {
         const y = 0;
         // 绘制第一个小横线
         context.beginPath ()
-        context.strokeStyle = '#c7c90c'
+        // context.strokeStyle = '#c7c90c'
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 10, y)
         context.stroke ()
         // 绘制小角
         context.beginPath ()
+        // context.strokeStyle = '#00ff00'
         context.strokeStyle = '#00ff00'
         context.moveTo (x + 10 + 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
         context.lineTo (x + 10, y)
@@ -2374,48 +2376,57 @@ class DrawCanvas {
         context.stroke ()
         // 绘制短横线
         context.beginPath ()
-        context.strokeStyle = '#c7c90c'
+        // context.strokeStyle = '#c7c90c'
+        context.strokeStyle = '#000'
         context.moveTo (x + 15, y)
-        context.lineTo (x + 45, y)
+        // context.lineTo (x + 45, y)
+        context.lineTo (x + 35, y)
         context.stroke ()
         // 绘制x号
         context.beginPath ()
         context.strokeStyle = '#00ff00'
-        context.moveTo (x + 41, y - 4)
-        context.lineTo (x + 49, y + 4)
+        context.moveTo (x + 31, y - 4)
+        context.lineTo (x + 39, y + 4)
         context.stroke ()
         context.beginPath ()
-        context.moveTo (x + 49, y - 4)
-        context.lineTo (x + 41, y + 4)
+        context.moveTo (x + 39, y - 4)
+        context.lineTo (x + 31, y + 4)
         context.stroke ()
         // 绘制斜线
         context.beginPath ()
-        context.moveTo (x + 35, y + 25)
-        context.lineTo (x + 65, y)
+        // context.moveTo (x + 45, y + 15)
+        context.moveTo (x + 35, y + 15)
+        context.lineTo (x + 55, y)
         context.stroke ()
         // 绘制斜线后面的短横线
         context.beginPath ()
-        context.strokeStyle = '#c7c90c'
-        context.moveTo (x + 65, y)
-        context.lineTo (x + 95, y)
+        // context.strokeStyle = '#c7c90c'
+        context.strokeStyle = '#000'
+        context.moveTo (x + 55, y)
+        context.lineTo (x + 75, y)
         context.stroke ()
         //绘制小箭头
         context.beginPath ()
         context.strokeStyle = '#00ff00'
-        context.moveTo (x + 95 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
-        context.lineTo (x + 95, y)
-        context.lineTo (x + 95 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        // context.moveTo (x + 95 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        context.moveTo (x + 75 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        context.lineTo (x + 75, y)
+        // context.lineTo (x + 95 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        context.lineTo (x + 75 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
         context.stroke ()
         context.beginPath ()
-        context.moveTo (x + 100 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
-        context.lineTo (x + 100, y)
-        context.lineTo (x + 100 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
+        // context.moveTo (x + 100 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        context.moveTo (x + 80 - 5 * Math.sqrt (2), y - 5 * Math.sqrt (2))
+        // context.lineTo (x + 100, y)
+        context.lineTo (x + 80, y)
+        context.lineTo (x + 80 - 5 * Math.sqrt (2), y + 5 * Math.sqrt (2))
         context.stroke ()
         // 绘制最后的短横线
         context.beginPath ()
-        context.strokeStyle = '#c7c90c'
-        context.moveTo (x + 100, y)
-        context.lineTo (x + 130, y)
+        // context.strokeStyle = '#c7c90c'
+        context.strokeStyle = '#000`'
+        context.moveTo (x + 80, y)
+        context.lineTo (x + 90, y)
         context.stroke ()
         // 绘制外层的描边
         context.beginPath ()
@@ -2457,7 +2468,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制第一个小横线
         context.beginPath ()
-        context.strokeStyle = 'red'
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         // context.lineTo (x + 30, y)
         context.lineTo (x + 10, y)
@@ -2519,9 +2530,7 @@ class DrawCanvas {
         context.stroke ()
         // 绘制最后的短横线
         context.beginPath ()
-        // context.moveTo (x + 120, y)
         context.moveTo (x + 60, y)
-        // context.lineTo (x + 150, y)
         context.lineTo (x + 80, y)
         context.stroke ()
         // 绘制外层的描边
@@ -2565,7 +2574,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制第一条横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 20, y)
         context.stroke ()
@@ -2640,7 +2649,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制短横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 20, y)
         context.stroke ()
@@ -2697,7 +2706,7 @@ class DrawCanvas {
         const y = 0;
         // 绘制第一个短横线
         context.beginPath ()
-        context.strokeStyle = color
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 10, y)
         context.stroke ()
@@ -2789,7 +2798,8 @@ class DrawCanvas {
         const y = 0;
         // 绘制实心小箭头
         context.beginPath ()
-        context.strokeStyle = color
+        // context.strokeStyle = '#000'
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 20, y)
         context.stroke ()

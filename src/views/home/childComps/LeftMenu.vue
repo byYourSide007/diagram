@@ -6,21 +6,26 @@
         </div>
         <!-- 展示电气原件 -->
         <div class="electrical_components">
+            <collapse-list title="仪器"
+                           :height_stage="140"
+                           :component-list="instruments"/>
+<!--            <collapse-list title="开关元件"-->
+<!--                           :height_stage="350"-->
+<!--                           :component-list="circuitSwitch"/>-->
             <collapse-list title="开关元件"
                            :height_stage="350"
-                           :component-list="circuitSwitch"/>
+                           :component-list="circuitSwitch_r"/>
 
-<!--            <collapse-list title="高压元件"-->
-<!--                           :component-list="HighVoltageComponents"/>-->
-<!--            &lt;!&ndash; 第一组电气元件 &ndash;&gt;-->
-<!--            <collapse-list title="基础原件"-->
-<!--                           :componentList="transformer"/>-->
+            <collapse-list title="高压元件"
+                           :height_stage="230"
+                           :component-list="HighVoltageComponents_r"/>
 
 
-<!--            <collapse-list-item>-->
-<!--                <template #image><img src="@/assets/electricalComps/1.png" alt="#"></template>-->
-<!--                <template #text>高压元件</template>-->
-<!--            </collapse-list-item>-->
+            <!-- 第一组电气元件 -->
+            <collapse-list title="基础原件"
+                           :height_stage="950"
+                           :componentList="transformer"/>
+
         </div>
     </div>
 </template>
@@ -38,20 +43,125 @@
         // 渲染数据
         transformer: [], // 基础元件
         HighVoltageComponents: [], // 高压元件
+        HighVoltageComponents_r: [], // 高压元件
         circuitSwitch: [], // 开关元件
+        circuitSwitch_r: [],
+        instruments: [], // 仪器
+        power: []
       }
     },
     components: {
       CollapseList, // 列表
-      // CollapseListItem, // 列表项
     },
     methods: {
+      // 绘制电源
+      drawPower() {
+
+      },
+
+      // 绘制仪器
+      drawInstruments() {
+        this.instruments[0] = new DrawCanvas (20, 30, "#000").drawVoltmeter() // 电压表
+        this.instruments[1] = new DrawCanvas (120, 30, "#000").drawAmmeter() // 电流表
+        // 示波器
+        this.instruments[2] = {
+          x: 240, // 起始点横坐标
+          y: 13, // 起始点纵坐标
+          scaleX: 0.6, // 宽度缩小40%
+          scaleY: 0.7, // 高度适当缩小
+          sceneFunc: function(context) {
+            // 在画布上绘制示波器图形
+            context.beginPath();
+            context.moveTo(0, 0);
+            context.lineTo(100, 0);
+            context.lineTo(100, 50);
+            context.lineTo(0, 50);
+            context.closePath();
+            context.moveTo(50, 0);
+            context.lineTo(50, 50);
+            context.strokeShape(this);
+            // 绘制突出的两条连接线
+            context.beginPath();
+            context.moveTo(-20, 25);
+            context.lineTo(0, 25);
+            context.closePath();
+            context.stroke();
+            context.beginPath();
+            context.moveTo(100, 25);
+            context.lineTo(120, 25);
+            context.closePath();
+            context.stroke();
+            // 绘制模拟显示的电波
+            context.beginPath();
+            context.moveTo(0, 25);
+            context.lineTo(10, 30);
+            context.lineTo(20, 20);
+            context.lineTo(30, 25);
+            context.lineTo(40, 40);
+            context.lineTo(50, 10);
+            context.lineTo(60, 25);
+            context.lineTo(70, 30);
+            context.lineTo(80, 20);
+            context.lineTo(90, 25);
+            context.lineTo(100, 15);
+            context.stroke();
+          },
+          stroke: 'black', // 边框颜色
+          strokeWidth: 2 // 边框宽度
+        }
+        // 信号发生器
+        this.instruments[3] = {
+          x: 35,
+          y: 80,
+          scaleX: 0.9,
+          scaleY: .8,
+          sceneFunc: (context, shape) => {
+            context.beginPath();
+            context.moveTo(0, 0);
+            context.lineTo(60, 0);
+            context.lineTo(60, 40);
+            context.lineTo(0, 40);
+            context.closePath();
+            context.fillStrokeShape(shape);
+
+            // 画信号发生器内部的波形图
+            context.beginPath();
+            context.moveTo(10, 10);
+            context.lineTo(20, 30);
+            context.lineTo(30, 10);
+            context.lineTo(40, 30);
+            context.lineTo(50, 10);
+            context.strokeShape(shape);
+            // 画连接线
+            context.beginPath();
+            context.moveTo(0, 20);
+            context.lineTo(-20, 20);
+            context.moveTo(60, 20);
+            context.lineTo(80, 20);
+            context.strokeShape(shape);
+          },
+          fill: '#fff',
+          stroke: 'black',
+          strokeWidth: 1,
+        }
+
+        const arrString = JSON.stringify(this.instruments, function(key, value) {
+          if (typeof value === 'function') {
+            return value.toString();
+          }
+          return value;
+        });
+        console.log(arrString)
+
+        this.instruments = this.strToConfig(arrString);
+      },
+
       // 绘制开关
       drawCircuitSwitch() {
         //  第一行
         this.circuitSwitch[0] = new DrawCanvas (10, 30, "#000").drawFuseSwitchOff()  // 熔断器开关断开状态
         this.circuitSwitch[1] = new DrawCanvas (100, 30, "#000").drawContactorPointOff() //熔断器开关闭合状态
-        this.circuitSwitch[2] = new DrawCanvas (190, 30, "#000").drawContactorPointOn() //接触器断点开关闭合状态
+        this.circuitSwitch[2] = new DrawCanvas (210, 30, "#000").drawContactorPointOn() //接触器断点开关闭合状态
         //  第二行
         this.circuitSwitch[3] = new DrawCanvas (10, 100, "#000").drawLoadIsoSwitchOff() // 负荷隔离开关断开状态
         this.circuitSwitch[4] = new DrawCanvas (100, 100, "#000").drawLoadIsoSwitchOn() //负荷隔离开关闭合状态
@@ -74,21 +184,39 @@
           }
           return value;
         });
-        console.log(arrString)
+        let str = arrString.replaceAll("context.strokeStyle = '#00ff00'", "context.strokeStyle = '#000'");
+        str = str.replaceAll("#f00", "#000");
+
+        this.circuitSwitch_r = this.strToConfig(str);
       },
+
       // 绘制高压元件
       drawHighVoltageComponents() { // 绘制高压元件
-        this.HighVoltageComponents[0] = new DrawCanvas(0, 50, '#000').drawWatt_hourMeter() //电表
-        this.HighVoltageComponents[1] = new DrawCanvas(110, 50, '#000').drawCoil() //线圈
+        this.HighVoltageComponents[0] = new DrawCanvas(10, 50, '#000').drawWatt_hourMeter() //电表
+        this.HighVoltageComponents[1] = new DrawCanvas(120, 50, '#000').drawCoil() //线圈
         this.HighVoltageComponents[2] = new DrawCanvas(230, 20, '#000').drawCapacitorBank() // 电容器组
         // 第二行
-        this.HighVoltageComponents[3] = new DrawCanvas(0, 120, '#000').drawLightningArrest() // 避雷器
-        this.HighVoltageComponents[4] = new DrawCanvas(110, 120, '#000').drawLiveShow() // 带电显示
-        this.HighVoltageComponents[5] = new DrawCanvas(200, 120, '#000').drawThreeItemTransformer() // 三向变压器
+        this.HighVoltageComponents[3] = new DrawCanvas(10, 120, '#000').drawLightningArrest() // 避雷器
+        this.HighVoltageComponents[4] = new DrawCanvas(120, 120, '#000').drawLiveShow() // 带电显示
+        this.HighVoltageComponents[5] = new DrawCanvas(210, 120, '#000').drawThreeItemTransformer() // 三向变压器
         // 第三行
-        this.HighVoltageComponents[6] = new DrawCanvas(0, 180, '#000').drawReactance() // 电抗器
+        this.HighVoltageComponents[6] = new DrawCanvas(10, 180, '#000').drawReactance() // 电抗器
+
+
+
+        const arrString = JSON.stringify(this.HighVoltageComponents, function(key, value) {
+          if (typeof value === 'function') {
+            return value.toString();
+          }
+          return value;
+        });
+
+        // console.log(arrString)
+
+        this.HighVoltageComponents_r = this.strToConfig(arrString)
 
       },
+
       // 基础元件
       drawElectricalComponents() {
           // 绘制变压器
@@ -143,12 +271,21 @@
         },
 
 
+      // 将字符串中保存的键值对（包含渲染函数）都转换为 Konva 中能够识别的配置
+      strToConfig(str) {
+        str = JSON.parse(str); // 将 JSON 形式的字符串转化为 js对象
+        str.forEach(item => {
+          eval("item.sceneFunc = " + item.sceneFunc); // 将字符串作为代码执行，并返回执行结果
+          item.draggable = false; // 列表项默认不能拖动
+        })
+        return str; // 将处理完成的字符串反馈
+      }
     },
     created() {
-      // 创建变压器
-      this.drawElectricalComponents()
-      this.drawHighVoltageComponents()
-      this.drawCircuitSwitch()
+      this.drawElectricalComponents(); // 绘制基础元件
+      this.drawHighVoltageComponents(); // 绘制高压仪器
+      this.drawCircuitSwitch();// 绘制开关
+      this.drawInstruments();// 绘制仪器
     }
   }
 </script>
