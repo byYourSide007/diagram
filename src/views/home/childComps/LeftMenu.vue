@@ -6,16 +6,18 @@
         </div>
         <!-- 展示电气原件 -->
         <div class="electrical_components">
+            <collapse-list title="电阻"
+                           :height_stage="190"
+                           :component-list="resistance"/>
+            <collapse-list title="电源"
+                           :height_stage="190"
+                           :component-list="power"/>
             <collapse-list title="仪器"
                            :height_stage="140"
                            :component-list="instruments"/>
-<!--            <collapse-list title="开关元件"-->
-<!--                           :height_stage="350"-->
-<!--                           :component-list="circuitSwitch"/>-->
             <collapse-list title="开关元件"
                            :height_stage="350"
                            :component-list="circuitSwitch_r"/>
-
             <collapse-list title="高压元件"
                            :height_stage="230"
                            :component-list="HighVoltageComponents_r"/>
@@ -47,7 +49,8 @@
         circuitSwitch: [], // 开关元件
         circuitSwitch_r: [],
         instruments: [], // 仪器
-        power: []
+        power: [], // 绘制电源
+        resistance: [],// 绘制电阻
       }
     },
     components: {
@@ -56,10 +59,31 @@
     methods: {
       // 绘制电源
       drawPower() {
+        this.power[0] = new DrawCanvas (15, 50, "#000").drawDoublePowerSwitchAllOn() // 双电源开关打开
+        this.power[1] = new DrawCanvas (120, 50, "#000").drawDoublePowerSwitchLeftOn() // 双电源开关打开
+        this.power[2] = new DrawCanvas (230, 50, "#000").drawDoublePowerSwitchRightOn() // 双电源开关打开
+        this.power[3] = new DrawCanvas (15, 130, "#000").drawDoublePowerSwitchAllOff() // 双电源开关打开
+        this.power[4] = new DrawCanvas (125, 130, "#000").drawCirclePower() //
+        this.power[5] = new DrawCanvas (240, 130, "#000").drawPower() // 电源开关
 
+        // 将函数类型的键值转换为字符串类型
+        const arrString = JSON.stringify(this.power, function(key, value) {
+          if (typeof value === 'function') {
+            return value.toString();
+          }
+          return value;
+        });
+        // console.log(arrString)
+        this.power = this.strToConfig(arrString)
       },
-      // 绘制电阻
 
+
+      // 绘制电阻
+      drawResistance() {
+        this.resistance[0] = new DrawCanvas (15, 30, "#000").drawLeftResistance() // 左侧是电阻
+        this.resistance[1] = new DrawCanvas (120, 30, "#000").drawMiddleResistance()  // 电阻
+        this.resistance[2] = new DrawCanvas (240, 30, "#000").drawResistance() // 电阻
+      },
       // 绘制保险丝
 
       // 绘制仪器
@@ -154,7 +178,7 @@
           }
           return value;
         });
-        console.log(arrString)
+        // console.log(arrString)
 
         this.instruments = this.strToConfig(arrString);
       },
@@ -289,6 +313,9 @@
       this.drawHighVoltageComponents(); // 绘制高压仪器
       this.drawCircuitSwitch();// 绘制开关
       this.drawInstruments();// 绘制仪器
+      this.drawPower();// 绘制电源
+      this.drawResistance(); // 绘制电阻
+
     }
   }
 </script>

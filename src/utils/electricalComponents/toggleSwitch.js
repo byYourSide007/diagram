@@ -13,13 +13,15 @@ class DrawCanvas {
     const _x = this.x
     const color = this.color
     return {
+      scaleX: 0.9,
       color: color,
       sceneFunc: function (context, shape) {
         const x = 0;
         const y = 0;
         // 绘制短横线
         context.beginPath ()
-        context.strokeStyle = '#00ff00'
+        // context.strokeStyle = '#00ff00'
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 60, y)
         context.stroke ()
@@ -163,13 +165,15 @@ class DrawCanvas {
     const _x = this.x
     const color = this.color
     return {
+      scaleX: 0.8,
       color: color,
       sceneFunc: function (context, shape) {
         const x = 0;
         const y = 0;
         // 绘制第一个小横线
         context.beginPath ()
-        context.strokeStyle = '#c7c90c'
+        // context.strokeStyle = '#c7c90c'
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 10, y)
         context.stroke ()
@@ -187,13 +191,13 @@ class DrawCanvas {
         context.stroke ()
         // 绘制短横线
         context.beginPath ()
-        context.strokeStyle = '#c7c90c'
+        context.strokeStyle = '#000'
         context.moveTo (x + 15, y)
         context.lineTo (x + 45, y)
         context.stroke ()
         // 绘制横线
         context.beginPath ()
-        context.strokeStyle = '#00ff00'
+        context.strokeStyle = '#000'
         context.moveTo (x + 45, y)
         context.lineTo (x + 85, y)
         context.stroke ()
@@ -209,7 +213,7 @@ class DrawCanvas {
         context.stroke ()
         // 绘制斜线后面的短横线
         context.beginPath ()
-        context.strokeStyle = '#c7c90c'
+        context.strokeStyle = '#000'
         context.lineWidth = 1
         context.moveTo (x + 85, y)
         context.lineTo (x + 115, y)
@@ -228,7 +232,7 @@ class DrawCanvas {
         context.stroke ()
         // 绘制最后的短横线
         context.beginPath ()
-        context.strokeStyle = '#c7c90c'
+        context.strokeStyle = '#000'
         context.moveTo (x + 120, y)
         context.lineTo (x + 130, y)
         context.stroke ()
@@ -1557,16 +1561,19 @@ class DrawCanvas {
    * @returns {{strokeWidth: number, draggable: boolean, name: string, fill: string, sceneFunc: sceneFunc, stroke: string}}
    */
   drawDoublePowerSwitchAllOff() {
-
+    const _x = this.x;
     const _y = this.y;
-    const _x = this.x
     return {
+      x: _x,
+      y: _y,
+      scaleX: 0.9,
+      scaleY: 0.9,
       sceneFunc: function (context, shape) {
         const x = 0;
         const y = 0;
         // 绘制中间的横线条
         context.beginPath ()
-        context.strokeStyle = '#fff'
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 90, y)
         context.stroke ()
@@ -1604,6 +1611,7 @@ class DrawCanvas {
         context.stroke ()
         // 绘制双开关部分
         context.beginPath ()
+        // context.moveTo (x + 20, y - 10)
         context.moveTo (x + 15, y - 10)
         context.lineTo (x + 20, y + 10)
         context.lineTo (x + 20, y + 15)
@@ -1627,14 +1635,13 @@ class DrawCanvas {
       },
       offsetX: 0,
       offsetY: 0,
-      x: _x,
-      y: _y,
+
       width: 90,
       height: 40,
       fill: 'transparent',
       stroke: 'transparent',
       strokeWidth: 2,
-      name: 'doublePowerSwitchAllOff',
+      name: 'doublePowerSwitchLeftOn',
       draggable: true,
     }
   }
@@ -1647,12 +1654,14 @@ class DrawCanvas {
     const _x = this.x;
     const _y = this.y;
     return {
+      scaleX: 0.9,
+      scaleY: 0.9,
       sceneFunc: function (context, shape) {
         const x = 0;
         const y = 0;
         // 绘制中间的横线条
         context.beginPath ()
-        context.strokeStyle = '#f00'
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 90, y)
         context.stroke ()
@@ -1730,13 +1739,17 @@ class DrawCanvas {
    * @returns {{strokeWidth: number, draggable: boolean, name: string, fill: string, sceneFunc: sceneFunc, stroke: string}}
    */
   drawDoublePowerSwitchRightOn() {
-    const x = this.x;
-    const y = this.y;
+    const _x = this.x;
+    const _y = this.y;
     return {
+      scaleX: 0.9,
+      scaleY: 0.9,
       sceneFunc: function (context, shape) {
+        const x = 0;
+        const y = 0;
         // 绘制中间的横线条
         context.beginPath ()
-        context.strokeStyle = '#f00'
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 90, y)
         context.stroke ()
@@ -1797,14 +1810,14 @@ class DrawCanvas {
       },
       offsetX: 0,
       offsetY: 0,
-      // x: _x,
-      // y: _y,
+      x: _x,
+      y: _y,
       width: 90,
       height: 40,
       fill: 'transparent',
       stroke: 'transparent',
       strokeWidth: 2,
-      name: 'doublePowerSwitchRightOn',
+      name: 'doublePowerSwitchLeftOn',
       draggable: true,
     }
   }
@@ -1817,12 +1830,14 @@ class DrawCanvas {
     const _y = this.y;
     const _x = this.x
     return {
+      scaleX: 0.9,
+      scaleY: 0.9,
       sceneFunc: function (context, shape) {
         const x = 0;
         const y = 0;
         // 绘制中间的横线条
         context.beginPath ()
-        context.strokeStyle = '#f00'
+        context.strokeStyle = '#000'
         context.moveTo (x, y)
         context.lineTo (x + 90, y)
         context.stroke ()
