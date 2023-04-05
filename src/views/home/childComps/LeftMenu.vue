@@ -6,42 +6,49 @@
         </div>
         <!-- 展示电气原件 -->
         <div class="electrical_components">
-            <collapse-list title="电阻"
-                           :height_stage="190"
-                           :component-list="resistance"/>
-            <collapse-list title="电源"
-                           :height_stage="190"
-                           :component-list="power"/>
-            <collapse-list title="仪器"
-                           :height_stage="140"
-                           :component-list="instruments"/>
-            <collapse-list title="开关元件"
-                           :height_stage="350"
-                           :component-list="circuitSwitch_r"/>
-            <collapse-list title="高压元件"
-                           :height_stage="230"
-                           :component-list="HighVoltageComponents_r"/>
+<!--            <collapse-list title="电阻"-->
+<!--                           :height_stage="130"-->
+<!--                           :component-list="resistance"/>-->
+<!--            <collapse-list title="电源"-->
+<!--                           :height_stage="190"-->
+<!--                           :component-list="power"/>-->
+<!--            <collapse-list title="仪器"-->
+<!--                           :height_stage="140"-->
+<!--                           :component-list="instruments"/>-->
+<!--            <collapse-list title="高压元件"-->
+<!--                           :height_stage="230"-->
+<!--                           :component-list="HighVoltageComponents_r"/>-->
+<!--            <collapse-list title="开关元件"-->
+<!--                           :height_stage="350"-->
+<!--                           :component-list="circuitSwitch_r"/>-->
 
+            <collapse-list v-for="el in electricListComps"
+                           :key="el.id"
+                           :title="el.title"
+                           :height_stage="el.height"
+                           :component-list="el.list"/>
 
-            <!-- 第一组电气元件 -->
-            <collapse-list title="基础原件"
-                           :height_stage="950"
-                           :componentList="transformer"/>
+<!--             第一组电气元件 -->
+<!--            <collapse-list title="基础原件"-->
+<!--                           :height_stage="950"-->
+<!--                           :componentList="transformer"/>-->
 
         </div>
     </div>
 </template>
 
 <script>
-  // 导入自定义组件
-  // import CollapseListItem from "@/components/common/collapse/CollapseListItem";
-  import CollapseList from "@/components/common/collapse/CollapseList";
   // 导入第三方组件
   import { DrawCanvas } from "@/utils/electricalComponents/toggleSwitch.js"
+  // 导入自定义组件
+  import CollapseList from "@/components/common/collapse/CollapseList";
+  import { eComps } from "@/request/home";
+
   export default {
     name: "LeftMenu",
     data() {
       return {
+        electricListComps: [],
         // 渲染数据
         transformer: [], // 基础元件
         HighVoltageComponents: [], // 高压元件
@@ -57,6 +64,15 @@
       CollapseList, // 列表
     },
     methods: {
+      getElectricComps() {
+        eComps().then((res) => {
+          console.log(res)
+          const { data } = res;
+          const test = data[0].list;
+          console.log(typeof test)
+          this.electricListComps = data;
+        })
+      },
       // 绘制电源
       drawPower() {
         this.power[0] = new DrawCanvas (15, 50, "#000").drawDoublePowerSwitchAllOn() // 双电源开关打开
@@ -83,6 +99,38 @@
         this.resistance[0] = new DrawCanvas (15, 30, "#000").drawLeftResistance() // 左侧是电阻
         this.resistance[1] = new DrawCanvas (120, 30, "#000").drawMiddleResistance()  // 电阻
         this.resistance[2] = new DrawCanvas (240, 30, "#000").drawResistance() // 电阻
+        this.resistance[3] = {
+          x: 15,
+          y: 90,
+          sceneFunc: (context) => {
+            context.beginPath();
+            context.moveTo(0, 0);
+            context.lineTo(20, 0);
+            context.lineTo(25, -5);
+            context.lineTo(30, 5);
+            context.lineTo(35, -5);
+            context.lineTo(40, 5);
+            context.lineTo(45, -5);
+            context.lineTo(50, 5);
+            context.lineTo(55, -5);
+            context.lineTo(60, 0);
+            context.lineTo(75, 0);
+            context.stroke();
+          },
+          draggable: true,
+
+          fill: '#000',
+          // stroke: 'black',
+          strokeWidth: 1
+        }
+        const arrString = JSON.stringify(this.resistance, function(key, value) {
+          if (typeof value === 'function') {
+            return value.toString();
+          }
+          return value;
+        });
+        // console.log(arrString)
+        this.resistance = this.strToConfig(arrString)
       },
       // 绘制保险丝
 
@@ -178,8 +226,6 @@
           }
           return value;
         });
-        // console.log(arrString)
-
         this.instruments = this.strToConfig(arrString);
       },
 
@@ -316,6 +362,7 @@
       this.drawPower();// 绘制电源
       this.drawResistance(); // 绘制电阻
 
+      this.getElectricComps();
     }
   }
 </script>

@@ -13,7 +13,8 @@
         <div :class="['list_content', {'is_active_class': is_active}]" >
             <v-stage :config="config" ref="stage_box" >
                 <v-layer ref="layer" >
-                    <div v-for="(item, index) in componentList" :key="index" >
+<!--                    <div v-for="(item, index) in componentList" :key="index" >-->
+                    <div v-for="(item, index) in componentListComputed" :key="index" >
                         <v-shape :config="item" @click="showIt"/>
                     </div>
                 </v-layer>
@@ -56,6 +57,12 @@
         required: true,
       }
     },
+    computed: {
+      // 渲染数据的列表（将字符串转化为对象）
+      componentListComputed() {
+        return this.strToConfig(this.componentList)
+      },
+    },
     methods: {
       // 当点击列表项的标题所触发的函数
       titleClick() {
@@ -63,9 +70,21 @@
         this.stage_height = this.$refs.stage_box.getStage().container().getBoundingClientRect().height;
         console.log(this.stage_height);
       },
+
+      // 点击电气元件的事件
       showIt(e) {
         const target = e.target;
         console.log(target.attrs.funcName);
+      },
+
+      // 将字符串中保存的键值对（包含渲染函数）都转换为 Konva 中能够识别的配置
+      strToConfig(str) {
+        str = JSON.parse(str); // 将 JSON 形式的字符串转化为 js对象
+        str.forEach(item => {
+          eval("item.sceneFunc = " + item.sceneFunc); // 将字符串作为代码执行，并返回执行结果
+          item.draggable = false; // 列表项默认不能拖动
+        })
+        return str; // 将处理完成的字符串反馈
       }
     },
 
