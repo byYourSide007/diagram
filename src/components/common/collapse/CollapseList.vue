@@ -74,7 +74,8 @@
       // 点击电气元件的事件
       showIt(e) {
         const target = e.target;
-        console.log(target.attrs.funcName);
+        // console.log(target.attrs)
+        this.$emit('setElectricComp', target.attrs)
       },
 
       // 将字符串中保存的键值对（包含渲染函数）都转换为 Konva 中能够识别的配置

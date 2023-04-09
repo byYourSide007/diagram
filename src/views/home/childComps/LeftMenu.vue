@@ -26,7 +26,8 @@
                            :key="el.id"
                            :title="el.title"
                            :height_stage="el.height"
-                           :component-list="el.list"/>
+                           :component-list="el.list"
+                           @setElectricComp="setElectricComp"/>
 
 <!--             第一组电气元件 -->
 <!--            <collapse-list title="基础原件"-->
@@ -48,7 +49,7 @@
     name: "LeftMenu",
     data() {
       return {
-        electricListComps: [],
+        electricListComps: [],// 左侧菜单栏存储的数据
         // 渲染数据
         transformer: [], // 基础元件
         HighVoltageComponents: [], // 高压元件
@@ -64,6 +65,7 @@
       CollapseList, // 列表
     },
     methods: {
+      // 从后端获取电气元件所有信息
       getElectricComps() {
         eComps().then((res) => {
           console.log(res)
@@ -73,6 +75,14 @@
           this.electricListComps = data;
         })
       },
+      // 如果点击了电气元件，则从左侧菜单栏向右端传递信息
+      setElectricComp(comp) {
+        this.$emit("showInRightStage", comp);
+      },
+
+
+
+
       // 绘制电源
       drawPower() {
         this.power[0] = new DrawCanvas (15, 50, "#000").drawDoublePowerSwitchAllOn() // 双电源开关打开
@@ -92,7 +102,6 @@
         // console.log(arrString)
         this.power = this.strToConfig(arrString)
       },
-
 
       // 绘制电阻
       drawResistance() {

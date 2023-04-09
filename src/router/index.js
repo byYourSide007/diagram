@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/home/HomeView.vue'
-
+import LoginView from '../views/login/LoginView.vue'
+import SignUp from "@/views/signup/SignUp";
 const routes = [
   {
     path: '/',
@@ -10,6 +11,17 @@ const routes = [
       title: "首页"
     },
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginView
+  },
+  {
+    path: '/sign-up',
+    name: 'sign-up',
+    component: SignUp,
+  }
+
 
 ]
 

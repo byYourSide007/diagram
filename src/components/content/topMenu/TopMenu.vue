@@ -12,13 +12,14 @@
                     </div>
                 </div>
                 <!-- 文件管理 -->
-                <div class="file_management">
-
-                </div>
+                <div class="file_management"></div>
             </template>
             <!-- 右侧内容区 -->
             <template #right>
-                <img src="@/assets/topSide/avatar.svg" alt="avatar" style="height: 100%">
+                <img src="@/assets/topSide/avatar.svg"
+                     alt="avatar"
+                     style="height: 100%"
+                     @click="showProfile">
             </template>
         </sides-menu>
     </div>
@@ -33,7 +34,12 @@
     },
     components: {
       SidesMenu
-    }
+    },
+    methods: {
+      showProfile() {
+
+      }
+    },
   }
 </script>
 
@@ -46,7 +52,6 @@
         .logo {
             display: flex;
             background-color: #fff;
-            /*padding: 5px 0;*/
             border-radius: 10px;
             img {
                 border-radius: inherit;

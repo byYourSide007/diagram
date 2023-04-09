@@ -1,18 +1,16 @@
 <template>
   <div id="app">
-    <!-- 顶部菜单栏 -->
-    <top-menu/>
     <!-- 功能展示界面 -->
     <router-view/>
   </div>
 </template>
 
 <script>
-  import TopMenu from "@/components/content/topMenu/TopMenu";
+  // import TopMenu from "@/components/content/topMenu/TopMenu";
   export default {
     name: "App",
     components: {
-      TopMenu
+      // TopMenu
     }
   }
 </script>
