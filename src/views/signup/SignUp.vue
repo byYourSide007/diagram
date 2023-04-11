@@ -13,12 +13,30 @@
             <!-- 输入信息区域 -->
             <div class="input_message">
                 <span class="signal_heading">注册您的工作区</span>
-                <input type="email"
-                       placeholder="Email Address"
-                       ref="message_email">
-                <input type="password"
-                       placeholder="Password"
-                       ref="message_password">
+                <div class="content">
+                    <input type="email"
+                           placeholder="Email Address"
+                           ref="message_email"
+                            @blur="emailBlur">
+                    <div class="alert_message_wrong" v-show="isEmailBlur&!isEmailRight">
+                        <img src="@/assets/sign/wrong.svg" alt="">
+                        <p>{{alertEmailMsg}}</p>
+                    </div>
+                    <div class="alert_message_right" v-show="isEmailBlur&isEmailRight">
+                        <img src="@/assets/sign/right.svg" alt="">
+                        <p>符合要求</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <input type="text"
+                           placeholder="Username"
+                           ref="username">
+                </div>
+                <div class="content">
+                    <input type="password"
+                           placeholder="Password"
+                           ref="message_password">
+                </div>
                 <!-- 点击区域 -->
                 <div class="clickPlace">
                     <button @click="btnClick"
@@ -31,8 +49,68 @@
 </template>
 
 <script>
+  import { signUpMessage, checkEmailExist } from "@/request/signUp";
+
   export default {
-    name: "SignUp"
+    name: "SignUp",
+    data() {
+      return {
+        isEmailBlur: false, // 输入 email 的输入框是否失去焦点（之后在得到焦点后才能失去焦点）
+        isEmailRight: true, // 判断邮箱是否符合要求
+        alertEmailMsg: '', // 邮箱出现的问题提示信息（正确的信息提示内容一致，错误才会提示）
+      }
+    },
+    methods: {
+      // 点击注册按钮所触发的事件
+      emailBlur() {
+        // 判断输入的邮箱地址是否符合邮箱规则
+        const email = this.$refs.message_email.value;
+        if (!email) { // 如果输入的邮箱地址为空
+          this.alertEmailMsg = '邮箱地址不能为空';
+          this.isEmailBlur = true; // 除了没有让其获取焦点的时候才不提示任何内容，当失去焦点一次，就一直有提示信息
+          this.isEmailRight = false; // 邮箱地址错误
+          return ; // 直接结束进程
+        }
+        // 如果输入的信息不为空，则判断其是否符合邮箱格式，使用正则表达式
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 设置正则
+        if (!emailPattern.test(email)) {
+          this.alertEmailMsg = '邮箱格式不正确';
+          this.isEmailBlur = true; // 除了没有让其获取焦点的时候才不提示任何内容，当失去焦点一次，就一直有提示信息
+          this.isEmailRight = false; // 邮箱地址错误
+          return; // 直接结束进程
+        }
+        // 发送 ajax 请求，判断邮箱是否已经被注册
+        checkEmailExist(email).then(res => {
+          const { data } = res; // 获取反馈的数据
+          console.log(data)
+          const status = data.status; // 获取反馈的状态
+          if (status === 0) { // 如果状态码为零（也就是没有被注册）
+            this.isEmailBlur = true; // 除了没有让其获取焦点的时候才不提示任何内容，当失去焦点一次，就一直有提示信息
+            this.isEmailRight = true; // 邮箱地址正确
+          }else { // 如果邮箱地址是正确的
+            this.isEmailBlur = true;
+            this.isEmailRight = false; // 邮箱地址错误
+            this.alertEmailMsg = data.message; // 服务器响应反馈的结果（虽然没有用）
+          }
+        })
+
+      },
+      // 输入邮箱地址的输入框失去焦点
+      btnClick() {
+        // 获取所有的信息(邮箱, 用户名，密码)
+        const email = this.$refs.message_email.value
+        const username = this.$refs.username.value
+        const password = this.$refs.message_password.value
+        console.log(email, username, password)
+        signUpMessage({
+          username,
+          password,
+          email
+        }).then(res => {
+          console.log(res)
+        })
+      },
+    }
   }
 </script>
 
@@ -95,22 +173,65 @@
             /* 子元素定位 */
             display: flex;
             flex-flow: column nowrap;
+            /* 输入信息前的提示信息 */
             .signal_heading {
                 font-size: 18px;
                 font-weight: 700;
                 color: #4B4B4C;
                 margin-bottom: 10px;
             }
-            input {
-                margin: 0 0 10px;
-                padding: 10px 12px;
-                font-size: 14px;
-                color: #555;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                box-shadow: inset 0 1px 5px rgba(0,0,0,.075);
+            /* 存储输入框内容和提示信息的容器*/
+            .content {
+                position: relative;
+                display: flex;
+                width: 100%;
+                line-height: 16px;
+                /* 输入信息框 */
+                input {
+                    width: 80%;
+                    margin: 0 0 10px;
+                    padding: 10px 12px;
+                    font-size: 14px;
+                    color: #555;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    box-shadow: inset 0 1px 5px rgba(0,0,0,.075);
+                }
+                /* 提示错误信息 */
+                .alert_message_wrong {
+                    position: absolute;
+                    display: flex;
+                    font-size: 12px;
+                    color: red;
+                    margin-left: 90%;
+                    white-space: nowrap;
+                    img {
+                        width: 18px;
+                        height: 42px;
+                    }
+                    p {
+                        margin-left: 5px;
+                    }
+                }
+                /* 符合要求提示信息 */
+                .alert_message_right {
+                    position: absolute;
+                    display: flex;
+                    font-size: 12px;
+                    color: green;
+                    margin-left: 90%;
+                    white-space: nowrap;
+                    img {
+                        width: 18px;
+                        height: 42px;
+                    }
+                    p {
+                        margin-left: 5px;
+                    }
+                }
             }
-            /* 点击输入信息的区域 */
+
+            /* 点击区域 */
             .message_btn {
                 width: 72px;
                 padding: 6px 0;
