@@ -18,20 +18,21 @@ export function request(config) {
   axios.interceptors.response.use(res => {
     return res;
   }, async error => {
-    // 超时重传
-    const delay = new Promise((resolve) => {    // 节流函数
-      setTimeout(() => {
-        resolve();
-      }, 200);// 间隔两百毫秒请求一次，等待回传
-    });
-    // 如果是取消请求，则不继续发送请求
-    if (error.message === "canceled") {
-      return error; // 直接结束，不等待响应
-    }
-    // 重新发起请求
-    return delay.then(function () {
-      return request(error.config);
-    });
+    // // 超时重传
+    // const delay = new Promise((resolve) => {    // 节流函数
+    //   setTimeout(() => {
+    //     resolve();
+    //   }, 200);// 间隔两百毫秒请求一次，等待回传
+    // });
+    // // 如果是取消请求，则不继续发送请求
+    // if (error.message === "canceled") {
+    //   return error; // 直接结束，不等待响应
+    // }
+    // // 重新发起请求
+    // return delay.then(function () {
+    //   return request(error.config);
+    // });
+    console.log(`error_response_interceptor: ${error}`)
   })
 
   return instance(config);

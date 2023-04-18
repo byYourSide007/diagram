@@ -4,6 +4,6 @@ import { request } from "@/request/index";
 export function eComps() {
   return request({
     method: "GET",
-    url: "/components/getElectricalComponents",
+    url: "/getElectricalComponents",
   })
 }

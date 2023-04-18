@@ -4,8 +4,13 @@ import { request } from "@/request/index";
 export function signUpMessage(config) {
   return request({
     method: 'POST',
-    url: "/user/sign-up",
-    params: {
+    url: "/sign-up",
+    // params: {
+    //   username: config.username, // 用户名
+    //   password: config.password, // 密码
+    //   email: config.email, // 邮箱地址
+    // }
+    data: {
       username: config.username, // 用户名
       password: config.password, // 密码
       email: config.email, // 邮箱地址
@@ -17,12 +22,20 @@ export function signUpMessage(config) {
 export function checkEmailExist(email) {
   return request({
     method: 'POST',
-    url: '/user/email-exist',
-    params: {
+    url: '/email-exist',
+    data: {
       email
     }
-    // params: {
-    //   email
-    // }
+  })
+}
+
+// 查看用户名是否已经被注册
+export function checkUsernameExist(username) {
+  return request({
+    method: "POST",
+    url: '/username-exist',
+    data: {
+      username
+    }
   })
 }

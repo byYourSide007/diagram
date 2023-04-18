@@ -13,6 +13,7 @@
             <!-- 输入信息区域 -->
             <div class="input_message">
                 <span class="signal_heading">注册您的工作区</span>
+                <!-- 邮箱地址 -->
                 <div class="content">
                     <input type="email"
                            placeholder="Email Address"
@@ -27,11 +28,22 @@
                         <p>符合要求</p>
                     </div>
                 </div>
+                <!-- 用户名 -->
                 <div class="content">
                     <input type="text"
                            placeholder="Username"
-                           ref="username">
+                           ref="username"
+                           @blur="usernameBlur">
+                    <div class="alert_message_wrong" v-show="isUsernameBlur&!isUsernameRight">
+                        <img src="@/assets/sign/wrong.svg" alt="">
+                        <p>{{alertUsernameMsg}}</p>
+                    </div>
+                    <div class="alert_message_right" v-show="isUsernameBlur&isUsernameRight">
+                        <img src="@/assets/sign/right.svg" alt="">
+                        <p>符合要求</p>
+                    </div>
                 </div>
+                <!-- 密码区域-->
                 <div class="content">
                     <input type="password"
                            placeholder="Password"
@@ -49,7 +61,7 @@
 </template>
 
 <script>
-  import { signUpMessage, checkEmailExist } from "@/request/signUp";
+  import { signUpMessage, checkEmailExist, checkUsernameExist } from "@/request/signUp";
 
   export default {
     name: "SignUp",
@@ -58,6 +70,10 @@
         isEmailBlur: false, // 输入 email 的输入框是否失去焦点（之后在得到焦点后才能失去焦点）
         isEmailRight: true, // 判断邮箱是否符合要求
         alertEmailMsg: '', // 邮箱出现的问题提示信息（正确的信息提示内容一致，错误才会提示）
+
+        isUsernameBlur: false, // 用户名输入框失去焦点
+        isUsernameRight: true, // 判断用户名是否符合要求
+        alertUsernameMsg: '', //错误的时候提示性的文本内容
       }
     },
     methods: {
@@ -90,25 +106,65 @@
           }else { // 如果邮箱地址是正确的
             this.isEmailBlur = true;
             this.isEmailRight = false; // 邮箱地址错误
-            this.alertEmailMsg = data.message; // 服务器响应反馈的结果（虽然没有用）
+            this.alertEmailMsg = data.message;
           }
         })
 
       },
-      // 输入邮箱地址的输入框失去焦点
-      btnClick() {
-        // 获取所有的信息(邮箱, 用户名，密码)
-        const email = this.$refs.message_email.value
-        const username = this.$refs.username.value
-        const password = this.$refs.message_password.value
-        console.log(email, username, password)
-        signUpMessage({
-          username,
-          password,
-          email
-        }).then(res => {
-          console.log(res)
+      // 用户名所执行的后续操作
+      usernameBlur(){
+        const username = this.$refs.username.value; // 获取用户名
+        if (!username) { // 如果用户名为空
+          this.isUsernameBlur = true; // 用户名输入框失去焦点
+          this.isUsernameRight = false; // 密码格式错误
+          this.alertUsernameMsg = "用户名不能为空"
+          return 0;// 直接结束进程
+        }
+        // 向服务器发送请求，查看用户名是否已经被注册
+        checkUsernameExist(username).then((res) => {
+          const { data } = res;
+          const status = data.status; // 获取反馈的状态
+          if (status === 0) { // 状态码为0，表示成功，1表示失败
+            this.isUsernameBlur = true; // 除了没有让其获取焦点的时候才不提示任何内容，当失去焦点一次，就一直有提示信息
+            this.isUsernameRight = true; // 邮箱地址正确
+          }else {
+            this.isUsernameRight = true;
+            this.isUsernameRight = false; // 邮箱地址错误
+            this.alertUsernameMsg = data.message; // 服务器响应反馈的结果（虽然没有用）
+          }
+          console.log(data)
+        }, error => {
+          console.log(error)
         })
+
+      },
+      // 点击注册按钮所执行的后续操作
+      btnClick() {
+        // 当邮箱失去焦点且邮箱符合标准，用户名输入正确且用户名失去焦点
+        if (this.isEmailBlur && this.isEmailRight && this.isUsernameRight && this.isUsernameBlur ) {
+          // 获取所有的信息(邮箱, 用户名，密码)
+          const email = this.$refs.message_email.value
+          const username = this.$refs.username.value
+          const password = this.$refs.message_password.value
+          signUpMessage({
+            username,
+            password,
+            email
+          }).then(res => {
+            const { data } = res; // 获取响应数据
+            const status = data.status; // 获取状态码
+            if (status === 0) {
+              // 如果是成功的响应
+              alert(data.message)
+            }else {
+              // 如果是失败的响应
+              alert(data.message)
+            }
+          })
+        }else {
+          return 0;
+        }
+
       },
     }
   }
