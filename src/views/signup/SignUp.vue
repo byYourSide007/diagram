@@ -47,7 +47,16 @@
                 <div class="content">
                     <input type="password"
                            placeholder="Password"
-                           ref="message_password">
+                           ref="message_password"
+                           @blur="passwordBlur">
+                    <div class="alert_message_wrong" v-show="isPasswordBlur&!isPasswordRight">
+                        <img src="@/assets/sign/wrong.svg" alt="">
+                        <p>{{alertPasswordMsg}}</p>
+                    </div>
+                    <div class="alert_message_right" v-show="isPasswordBlur&isPasswordRight">
+                        <img src="@/assets/sign/right.svg" alt="">
+                        <p>符合要求</p>
+                    </div>
                 </div>
                 <!-- 点击区域 -->
                 <div class="clickPlace">
@@ -74,10 +83,14 @@
         isUsernameBlur: false, // 用户名输入框失去焦点
         isUsernameRight: true, // 判断用户名是否符合要求
         alertUsernameMsg: '', //错误的时候提示性的文本内容
+
+        isPasswordBlur: false, // 当输入密码的区域失去焦点
+        isPasswordRight: false, // 密码输入正确的时候
+        alertPasswordMsg: '', // 提示密码区域的信息
       }
     },
     methods: {
-      // 点击注册按钮所触发的事件
+      // 当邮箱失去了焦点
       emailBlur() {
         // 判断输入的邮箱地址是否符合邮箱规则
         const email = this.$refs.message_email.value;
@@ -95,6 +108,7 @@
           this.isEmailRight = false; // 邮箱地址错误
           return; // 直接结束进程
         }
+
         // 发送 ajax 请求，判断邮箱是否已经被注册
         checkEmailExist(email).then(res => {
           const { data } = res; // 获取反馈的数据
@@ -138,10 +152,27 @@
         })
 
       },
+      // 密码输入框失去了焦点之后
+      passwordBlur() {
+        const password = this.$refs.message_password.value; // 获取密码输入框中的值
+        this.isPasswordBlur = true;
+        if (!password) {// 如果密码输入框中的内容为空
+          this.isPasswordRight = false; // 密码不符合要求
+          this.alertPasswordMsg = '密码不能为空'; // 提示文本
+          return;
+        }
+        const passwordLen = password.length;
+        if (6 > passwordLen || passwordLen > 16) {
+          this.isPasswordRight = false; // 密码不符合要求
+          this.alertPasswordMsg = '长度应为6-16位数'; // 提示文本
+          return;
+        }
+        this.isPasswordRight = true; // 密码不符合要求，提示性的文本设置就没有意义了
+      },
       // 点击注册按钮所执行的后续操作
       btnClick() {
         // 当邮箱失去焦点且邮箱符合标准，用户名输入正确且用户名失去焦点
-        if (this.isEmailBlur && this.isEmailRight && this.isUsernameRight && this.isUsernameBlur ) {
+        if (this.isEmailBlur && this.isEmailRight && this.isUsernameRight && this.isUsernameBlur && this.isPasswordBlur && this.isPasswordRight) {
           // 获取所有的信息(邮箱, 用户名，密码)
           const email = this.$refs.message_email.value
           const username = this.$refs.username.value
