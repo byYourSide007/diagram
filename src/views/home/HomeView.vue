@@ -47,9 +47,8 @@ export default {
     flex-flow: column nowrap;
     overflow: hidden;
     .home_content {
-      /*display: flex;*/
       display: flex;
-      flex-flow: column nowrap;
+
       width: 100vw;
       /*height: calc(100vh - 50px);*/
       height: calc(100vh - 50px - 1px);/* 减去顶部高度！减去 border 宽度？*/
