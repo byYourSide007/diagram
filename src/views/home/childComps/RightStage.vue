@@ -1,27 +1,40 @@
 <template>
     <div class="right_stage">
 <!--        右侧操作台-->
-            <v-stage :config="config" ref="stage">
+            <v-stage :config="stageConfig"
+                     ref="stage"
+                     @mousedown="handleStageMouseDown"
+                     @touchstart="handleStageMouseDown"
+                     >
                 <v-layer ref="layer">
                         <v-shape v-for="(item, index) in compsElectricListComputed"
                                  :key="index"
                                  :config="item"
-                                 :transformable="true"
-                                 @click="shapeItemClick"
-                                 />
-                    <v-transform ref="transformer"></v-transform>
+                                 @transformend="handleTransformEnd"
+                                 >
+                          <v-circle :config="circleConfig"/>
+                        </v-shape>
+<!--                                 />-->
+<!--                    <v-transform ref="transformer"></v-transform>-->
+                  <v-transformer ref="transformer" />
                 </v-layer>
             </v-stage>
     </div>
 </template>
 
 <script>
-  import Konva from 'konva'
+  // import Konva from 'konva'
   export default {
     name: "RightStage",
     data() {
       return {
-        config: {
+        circleConfig: {
+          x: 0,
+          y: 0,
+          radius: 1,
+          fill: 'transparent'
+        },
+        stageConfig: {
           width: 1000,
           height: 1000
         },
@@ -41,7 +54,6 @@
         if (arr.length === 0) {
           return []
         }
-
         arr.forEach(item => {
           // 定义初始位置
           item.x = 100;
@@ -49,33 +61,80 @@
           // 让图形可以背拖动
           item.draggable = true;
           // 让图形可以被控制大小
-          item.width = 300;
-          item.height = 200;
+          item.width = 100;
+          item.height = 100;
 
           // item.fill = '#000';
           item.strokeWidth = 1;
 
-          item.resizeEnabled = true;
-          // item.resizeSnapTolerance = 5;
-          // item.resizeSnapToGrid = true;
-          // item.snapToGrid = [10, 10];
-          // 拖动锚点时保持纵横比
-          item.keepRatio = true;
-          // 锚点样式
-          item.anchorStroke = 'black';
-          item.anchorFill = '#000';
-          item.anchorSize =  100;
+          item.offsetX = item.width / 2
+          item.offsetY = item.height / 2
         })
-        console.log(arr)
         return arr
       }
     },
     methods: {
-      // shapeItemClick(e) {
-      shapeItemClick() {
-        const shapeNodes = this.$refs.stage.getStage().find(".konvajs_shape");
-        let tr = new Konva.Transformer();
-        tr.nodes([shapeNodes[0]])
+      handleTransformEnd(e) {
+        // shape is transformed, let us save new attrs back to the node
+        // find element in our state
+        // const rect = this.rectangles.find(
+        const rect = this.compsElectricListComputed.find(
+            (r) => r.name === this.selectedShapeName
+        );
+        // update the state
+        rect.x = e.target.x();
+        rect.y = e.target.y();
+        rect.rotation = e.target.rotation();
+        rect.scaleX = e.target.scaleX();
+        rect.scaleY = e.target.scaleY();
+
+        // change fill
+        // rect.fill = Konva.Util.getRandomColor();
+      },
+
+      handleStageMouseDown(e) {
+        // 单击舞台 - 清除选择
+        if (e.target === e.target.getStage()) {
+          this.selectedShapeName = '';
+          this.updateTransformer();
+          return;
+        }
+
+        // 点击 trans_former - 什么都不做
+        const clickedOnTransformer = e.target.getParent().className === 'Transformer';
+        if (clickedOnTransformer) {
+          return;
+        }
+
+        // 按名称查找单击的矩形
+        const name = e.target.name();
+        const rect = this.compsElectricListComputed.find((r) => r.name === name);
+        if (rect) {
+          this.selectedShapeName = name;
+        } else {
+          this.selectedShapeName = '';
+        }
+        this.updateTransformer();
+      },
+      updateTransformer() {
+        // 这里我们需要手动attach或者detach Transformer节点
+        const transformerNode = this.$refs.transformer.getNode();
+        const stage = transformerNode.getStage();
+        const { selectedShapeName } = this;
+
+        const selectedNode = stage.findOne('.' + selectedShapeName);
+        // do nothing if selected node is already attached
+        if (selectedNode === transformerNode.node()) {
+          return;
+        }
+
+        if (selectedNode) {
+          // attach to another node
+          transformerNode.nodes([selectedNode]);
+        } else {
+          // remove transformer
+          transformerNode.nodes([]);
+        }
       },
     },
   }
@@ -83,14 +142,12 @@
 
 <style scoped lang="scss">
     .right_stage {
-        width: calc(100vw - 363px - 2px);
+        //width: calc(100vw - 363px - 2px);
+      width: 100vw;
         height: calc(100% - 2px);
         background-color: #fff;
         border: 1px solid #eee;
         overflow: auto;/*生成滚动条*/
     }
-    iframe {
-        border: 1px solid black;
-        width: 100%;
-    }
+
 </style>
