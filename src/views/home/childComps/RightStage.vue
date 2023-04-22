@@ -1,24 +1,23 @@
 <template>
-    <div class="right_stage">
+    <div class="right_stage" ref="container">
+        <button @click="save">保存</button>
 <!--        右侧操作台-->
-            <v-stage :config="stageConfig"
-                     ref="stage"
-                     @mousedown="handleStageMouseDown"
-                     @touchstart="handleStageMouseDown"
-                     >
-                <v-layer ref="layer">
-                        <v-shape v-for="(item, index) in compsElectricListComputed"
-                                 :key="index"
-                                 :config="item"
-                                 @transformend="handleTransformEnd"
-                                 >
-                          <v-circle :config="circleConfig"/>
-                        </v-shape>
-<!--                                 />-->
-<!--                    <v-transform ref="transformer"></v-transform>-->
-                  <v-transformer ref="transformer" />
-                </v-layer>
-            </v-stage>
+        <v-stage :config="stageConfig"
+                 ref="stage"
+                 @mousedown="handleStageMouseDown"
+                 @touchstart="handleStageMouseDown"
+                 >
+            <v-layer ref="layer">
+                    <v-shape v-for="(item, index) in compsElectricListComputed"
+                             :key="index"
+                             :config="item"
+                             @transformend="handleTransformEnd"
+                             >
+                      <v-circle :config="circleConfig"/>
+                    </v-shape>
+              <v-transformer ref="transformer" />
+            </v-layer>
+        </v-stage>
     </div>
 </template>
 
@@ -74,6 +73,7 @@
       }
     },
     methods: {
+      // 转换图形相关的方法
       handleTransformEnd(e) {
         // shape is transformed, let us save new attrs back to the node
         // find element in our state
@@ -91,7 +91,6 @@
         // change fill
         // rect.fill = Konva.Util.getRandomColor();
       },
-
       handleStageMouseDown(e) {
         // 单击舞台 - 清除选择
         if (e.target === e.target.getStage()) {
@@ -136,6 +135,18 @@
           transformerNode.nodes([]);
         }
       },
+
+      // 保存图片相关信息
+      load() {
+        const data = localStorage.getItem('storage') || '[]';
+        this.list = JSON.parse(data);
+      },
+      save() {
+        const stage = this.$refs.stage.getStage()
+        const stageJSON = stage.toJSON()
+        console.log(stageJSON)
+        console.log('***************************************************************')
+      }
     },
   }
 </script>
