@@ -8,15 +8,15 @@
         <div class="right_side" @click="showHeaderMenu">
                 <slot name="right"></slot>
             <!-- 显示的菜单 -->
-<!--            <div class="list_menu" :style="{display: isClickHeader?afterLoginShowList:'none'}">-->
-<!--            <div class="list_menu" :style="{display: afterLoginShowList}">-->
+
+            <!-- 初始化内容 -->
             <div class="list_menu" :style="{display: this.isClickHeader?(this.haveLogin?'none':'block'):'none'}">
                 <div class="list_menu_item" @click="loginProfile">登录</div>
-                <div class="list_menu_item">注册</div>
+                <div class="list_menu_item" @click="signup">注册</div>
             </div>
-<!--            <div class="list_menu" :style="{display: haveLogin?'none':'block'}">-->
+            <!-- 登录后显示的内容 -->
             <div class="list_menu" :style="{display: this.isClickHeader?(this.haveLogin?'block':'none'):'none'}">
-                <div class="list_menu_item">个人中心</div>
+                <div class="list_menu_item" @click="profileCenter">个人中心</div>
                 <div class="list_menu_item">退出</div>
             </div>
         </div>
@@ -34,15 +34,12 @@
     },
     computed: {
       haveLogin() {
-        // return true; // 测试用
         return this.$store.state.isLogin;
       },
       afterLoginShowList() {
-        // return this.haveLogin?'block':'none'
-
-        // return this.isClickHeader?(this.haveLogin?'block':'none'):'none'
         return this.isClickHeader?(this.haveLogin?'block':'none'):'none'
-      }
+      },
+
     },
     methods: {
       // 点击头像后所触发的点击事件，用于显示菜单
@@ -53,6 +50,14 @@
       loginProfile() {
         this.$router.push('/login')
       },
+      // 注册按钮
+      signup() {
+        this.$router.push('/sign-up')
+      },
+      // 跳转到个人中心
+      profileCenter() {
+        this.$router.push('/profile')
+      }
     },
   }
 </script>
@@ -98,6 +103,7 @@
                 border: 1px solid #eee;
                 border-radius: 5px;
                 overflow: hidden;
+                z-index:999;
                 :before { /* 设置三角形 */
                     content: "";
                     position: absolute;

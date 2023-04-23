@@ -17,11 +17,6 @@ export function signUpMessage(config) {
   return request({
     method: 'POST',
     url: "/sign-up",
-    // params: { // 使用 query 的方式去 传递数据
-    //   username: config.username, // 用户名
-    //   password: config.password, // 密码
-    //   email: config.email, // 邮箱地址
-    // }
     data: {
       username: config.username, // 用户名
       password: config.password, // 密码

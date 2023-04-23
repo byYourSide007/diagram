@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  // import Konva from 'konva'
+  import { sendStage } from '../../../request/home.js'
   export default {
     name: "RightStage",
     data() {
@@ -136,16 +136,15 @@
         }
       },
 
-      // 保存图片相关信息
-      load() {
-        const data = localStorage.getItem('storage') || '[]';
-        this.list = JSON.parse(data);
-      },
+      // 保存 stage 中的相关信息
       save() {
+        // 查看是否登录，如果没有登录，则跳转到登录界面
+
+        // 如果登录，则保存到该用户名下
+
         const stage = this.$refs.stage.getStage()
         const stageJSON = stage.toJSON()
-        console.log(stageJSON)
-        console.log('***************************************************************')
+        sendStage(stageJSON)
       }
     },
   }

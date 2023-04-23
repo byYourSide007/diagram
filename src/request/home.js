@@ -7,3 +7,14 @@ export function eComps() {
     url: "/getElectricalComponents",
   })
 }
+
+// 向后端保存 stage 数据
+export function sendStage(data) {
+  return request({
+    method: "POST",
+    url: '/stageSave',
+    data: {
+      stageData: data
+    }
+  })
+}

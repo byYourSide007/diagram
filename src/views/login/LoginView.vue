@@ -122,9 +122,22 @@
             email,
             password
           }
+          // 往后端发送数据
           loginMessage(config).then(res => {
             const { data } = res;
-            console.log(data)
+            // 如果没有登录权限
+            if (data.status === 1) {
+              alert("登录失败")
+            }else if (data.status === 0) { // 如果登录成功
+                this.$store.commit('loginStatus', {
+                  isLogin: true, // 登录状态切换为 true，也就是正在登录
+                  username: data.username, // 用户名进行记录
+                  // avatar: data.avatar, // 用户的头像信息
+                })
+              console.log(data.username)
+                // 跳转到首页
+                this.$router.push('/')
+            }
           })
 
         }else {
