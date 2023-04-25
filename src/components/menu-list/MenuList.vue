@@ -16,7 +16,11 @@
         max-width: 275px;
         height: 100%;
         flex-flow: column nowrap;
-        overflow-y: scroll;
+        overflow-y: hidden;
         border-right: 3px solid #fff;
+
+        margin: 0;
+        padding: 0;
+
     }
 </style>

@@ -2,7 +2,6 @@
   <div class="home">
     <!-- 顶部菜单栏 -->
     <top-menu/>
-
     <div class="home_content">
       <!-- 左侧菜单栏区域 -->
       <left-menu @showInRightStage="showRightStage"/>

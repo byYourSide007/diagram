@@ -1,8 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/home/HomeView.vue'
 import LoginView from '../views/login/LoginView.vue'
-import SignUp from "@/views/signup/SignUp";
-import ProfileCenter from "@/views/profile/ProfileCenter";
+import SignUp from "../views/signup/SignUp.vue";
+import ProfileCenter from "../views/profile/ProfileCenter.vue";
+import PersonalCenter from "../views/center/PersonalCenter.vue";
+import BluePrint from "../views/blueprint/BluePrint.vue";
+import SettingsConfig from "../views/settings/SettingsConfig.vue";
+
 const routes = [
   {
     path: '/',
@@ -25,7 +29,29 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: ProfileCenter
+    component: ProfileCenter,
+    children: [
+      // {
+      //   path: '',
+      //   name: "default",
+      //   components: PersonalCenter
+      // },
+      {
+        path: 'message',
+        name: "message",
+        component: PersonalCenter
+      },
+      {
+        path: 'blueprint',
+        name: 'blueprint',
+        component: BluePrint
+      },
+      {
+        path: 'settings',
+        name: 'settings',
+        component: SettingsConfig
+      }
+    ]
   }
 
 

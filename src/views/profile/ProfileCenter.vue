@@ -1,21 +1,30 @@
 <template>
     <div class="profile">
         <div class="profile-header">
-            Profile
+            {{title}}
         </div>
         <div class="left-menu">
 
         </div>
         <menu-list>
-            <menu-list-item
-                    v-for="(item, index) in leftMenuList"
-                    :key="index"
-                    :title="item.title"
-                    :avatar="item.avatar"></menu-list-item>
+            <menu-list-item v-for="(item, index) in leftMenuList"
+                            :key="index"
+                            :title="item.title"
+                            @click="isChecked(item.title, item.route)"
+                            :is-checked="item.title === checkedTitle">
+                <template #avatar>
+                    <img :src="item.avatar" alt="#" style="width: 38px">
+                </template>
+            </menu-list-item>
         </menu-list>
-        <div class="right-stage">
 
+        <div class="right-stage">
+            <router-view></router-view>
         </div>
+
+
+
+
     </div>
 </template>
 
@@ -26,21 +35,36 @@
     name: "ProfileCenter",
     data() {
       return {
-        title: '', // 显示的文本标题
+        title: '个人中心', // 显示的文本标题
         leftMenuList: [
           {
             title: '个人中心', //
-            avatar: '', // 头像地址
+            route: 'message',
+            avatar: 'http://121.4.13.126:3009/img/Profile.svg', // 头像地址
           },
           {
             title: '图纸', //
-            avatar: '', // 头像地址
+            route: 'blueprint',
+            avatar: 'http://121.4.13.126:3009/img/blueprint.svg', // 头像地址
           },
           {
             title: '设置', //
-            avatar: '', // 头像地址
+            route: 'settings',
+            avatar: 'http://121.4.13.126:3009/img/setting.svg', // 头像地址
           },
-        ]
+        ],
+
+        // checkedTitle: this.leftMenuList[0].title
+        checkedTitle: '个人中心'
+      }
+    },
+    methods: {
+      // 用于切换被选中的选项
+      isChecked(title, route) {
+        console.log(route)
+        this.$router.push('/profile/'+ route)
+        this.title = title;
+        this.checkedTitle = title;
       }
     },
     components: {
@@ -59,6 +83,7 @@
         overflow-y: hidden;
         background-color: #eee;
         border: 1px solid #e6e7e9;
+        
         .profile-header {
             height: 50px;
             background-color: #f7f7f7;
