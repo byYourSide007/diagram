@@ -16,7 +16,10 @@
         max-width: 275px;
         height: 100%;
         flex-flow: column nowrap;
-        overflow-y: hidden;
+        /*overflow-y: hidden;*/
+        overflow: hidden;
+
+
         border-right: 3px solid #fff;
 
         margin: 0;

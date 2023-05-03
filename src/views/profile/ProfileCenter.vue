@@ -3,26 +3,25 @@
         <div class="profile-header">
             {{title}}
         </div>
-        <div class="left-menu">
+        <div class="menu">
+            <div class="left-menu">
+                <menu-list>
+                    <menu-list-item v-for="(item, index) in leftMenuList"
+                                    :key="index"
+                                    :title="item.title"
+                                    @click="isChecked(item.title, item.route)"
+                                    :is-checked="item.title === checkedTitle">
+                        <template #avatar>
+                            <img :src="item.avatar" alt="#" style="width: 38px">
+                        </template>
+                    </menu-list-item>
+                </menu-list>
+            </div>
 
+            <div class="right-stage">
+                <router-view></router-view>
+            </div>
         </div>
-        <menu-list>
-            <menu-list-item v-for="(item, index) in leftMenuList"
-                            :key="index"
-                            :title="item.title"
-                            @click="isChecked(item.title, item.route)"
-                            :is-checked="item.title === checkedTitle">
-                <template #avatar>
-                    <img :src="item.avatar" alt="#" style="width: 38px">
-                </template>
-            </menu-list-item>
-        </menu-list>
-
-        <div class="right-stage">
-            <router-view></router-view>
-        </div>
-
-
 
 
     </div>
@@ -48,13 +47,16 @@
             avatar: 'http://121.4.13.126:3009/img/blueprint.svg', // 头像地址
           },
           {
+            title: "帮助",
+            route: "help",
+            avatar: "http://121.4.13.126:3009/img/help.svg"
+          },
+          {
             title: '设置', //
             route: 'settings',
             avatar: 'http://121.4.13.126:3009/img/setting.svg', // 头像地址
           },
         ],
-
-        // checkedTitle: this.leftMenuList[0].title
         checkedTitle: '个人中心'
       }
     },
@@ -83,7 +85,10 @@
         overflow-y: hidden;
         background-color: #eee;
         border: 1px solid #e6e7e9;
-        
+
+        display: flex;
+        flex-flow: column nowrap;
+
         .profile-header {
             height: 50px;
             background-color: #f7f7f7;
@@ -95,5 +100,19 @@
             font-size: 17px;
             border-bottom: 1px solid #e6e7e9;
         }
+
+        .menu {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            .left-menu {
+
+            }
+        }
+        .right-stage {
+            width: 100%;
+        }
+
     }
 </style>

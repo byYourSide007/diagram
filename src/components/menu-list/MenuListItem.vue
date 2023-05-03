@@ -44,7 +44,8 @@
         height: 50px;
         font-weight: 500;
         color: #4aaf51;
-        padding: 8px 0 0 75px;
+        /*padding: 8px 0 0 75px;*/
+        padding: 8px 35px 0 20px;
 
         display: flex;
         line-height: 42px;
