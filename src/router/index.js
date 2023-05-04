@@ -6,6 +6,7 @@ import ProfileCenter from "../views/profile/ProfileCenter.vue";
 import PersonalCenter from "../views/center/PersonalCenter.vue";
 import BluePrint from "../views/blueprint/BluePrint.vue";
 import SettingsConfig from "../views/settings/SettingsConfig.vue";
+import HelpView from "@/views/help/HelpView";
 
 const routes = [
   {
@@ -50,6 +51,11 @@ const routes = [
         path: 'settings',
         name: 'settings',
         component: SettingsConfig
+      },
+      {
+        path: 'help',
+        name: 'help',
+        component: HelpView
       }
     ]
   }

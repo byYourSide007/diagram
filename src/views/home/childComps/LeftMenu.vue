@@ -68,7 +68,7 @@
       // 从后端获取电气元件所有信息
       getElectricComps() {
         eComps().then((res) => {
-          console.log(res)
+          // console.log(res)
           const { data } = res;
           const test = data[0].list;
           console.log(typeof test)

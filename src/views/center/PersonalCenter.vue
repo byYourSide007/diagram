@@ -4,12 +4,10 @@
             <div class="header-avatar">
                 <img src="@/assets/personal/avatar_female.svg" alt="avatar">
             </div>
-
             <div class="logo">
-                <div>图纸总数: <span>3</span></div>
-                <div>canvas图纸总数:    <span>1</span></div>
-                <div>图片图纸总数: <span>2</span></div>
-
+                <div>图纸总数: <span>{{total_blueprint}}</span></div>
+                <div>canvas图纸总数: <span>{{canvas_blueprint}}</span></div>
+                <div>图片图纸总数: <span>{{img_blueprint}}</span></div>
             </div>
         </div>
         <div class="message_list">

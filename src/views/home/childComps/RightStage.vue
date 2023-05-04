@@ -18,15 +18,81 @@
               <v-transformer ref="transformer" />
             </v-layer>
         </v-stage>
+
+<!--        <v-shape :data="line" :sceneFunc="render"/>-->
     </div>
 </template>
 
 <script>
+  import Konva from 'konva';
   import { sendStage } from '../../../request/home.js'
   export default {
     name: "RightStage",
     data() {
       return {
+        line:[
+          new Konva.Line({
+            points: [0, 100, 0, 250],
+            stroke: 'black',
+            strokeWidth: 2,
+            draggable: true,
+          }),
+          new Konva.Line({
+            points: [0, 100, 0, 250],
+            stroke: 'black',
+            strokeWidth: 2,
+            draggable: true,
+          }),
+          new Konva.Line({
+            points: [0, 0, 100, 0],
+            stroke: 'black',
+            strokeWidth: 2,
+            draggable: true,
+          }),
+          new Konva.Line({
+            points: [0, 0, 100, 0],
+            stroke: 'black',
+            strokeWidth: 2,
+            draggable: true,
+          }),
+          new Konva.Line({
+            points: [0, 0, 100, 0],
+            stroke: 'black',
+            strokeWidth: 2,
+            draggable: true,
+          }),
+          new Konva.Line({
+            points: [100, 0, 220, 0],
+            stroke: 'black',
+            strokeWidth: 2,
+            draggable: true,
+          }),
+          new Konva.Line({
+            points: [100, 0, 220, 0],
+            stroke: 'black',
+            strokeWidth: 2,
+            draggable: true,
+          }),          new Konva.Line({
+            points: [100, 0, 220, 0],
+            stroke: 'black',
+            strokeWidth: 2,
+            draggable: true,
+          }),
+          new Konva.Line({
+            points: [100, 0, 300, 0],
+            stroke: 'black',
+            strokeWidth: 2,
+            draggable: true,
+          }),
+          new Konva.Line({
+            points: [100, 0, 300, 0],
+            stroke: 'black',
+            strokeWidth: 2,
+            draggable: true,
+          }),
+        ],
+
+
         circleConfig: {
           x: 0,
           y: 0,
@@ -139,20 +205,41 @@
       // 保存 stage 中的相关信息
       save() {
         // 查看是否登录，如果没有登录，则跳转到登录界面
-
+        if (!this.$store.state.isLogin) {
+          this.$router.push('/')
+        }
         // 如果登录，则保存到该用户名下
-
         const stage = this.$refs.stage.getStage()
         const stageJSON = stage.toJSON()
-        sendStage(stageJSON)
+
+        console.log(stageJSON)
+        if (this.$store.state.isLogin) {
+          sendStage(stageJSON)
+
+        }
+      },
+      render(ctx, shape) {
+        const layer = shape.getLayer();
+        const stage = layer.getStage();
+        const line = shape.getData();
+        layer.add(line);
+        stage.add(layer);
+        layer.draw();
       }
     },
+    mounted() {
+      const layer = this.$refs.layer.getStage();
+        prompt("请输入保存的图纸名称")
+      for (let i = 0; i < 9; i++) {
+        layer.add(this.line[i]);
+        layer.draw();
+      }
+    }
   }
 </script>
 
 <style scoped lang="scss">
     .right_stage {
-        //width: calc(100vw - 363px - 2px);
       width: 100vw;
         height: calc(100% - 2px);
         background-color: #fff;
