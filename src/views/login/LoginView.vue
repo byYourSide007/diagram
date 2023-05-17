@@ -136,9 +136,17 @@
                   user_data: data.user_data
                 })
 
-              // 本地存储用户信息
-                this.localStorage.setItem('username', data.username)
+                // 本地存储用户信息
+                // localStorage.setItem('username', {
+                //   "username": data.username
+                // });
+              // console.log(localStorage.getItem('username'));
+              // console.log(JSON.parse(localStorage.getItem('username')));
+              //   localStorage.setItem('id', data.user_data.id);
 
+
+              const data_user = JSON.stringify(data.user_data)
+                localStorage.setItem('user_data', data_user);
                 // 跳转到首页
                 this.$router.push('/')
             }

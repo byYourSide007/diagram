@@ -6,8 +6,8 @@
             </div>
             <div class="logo">
                 <div>图纸总数: <span>{{total_blueprint}}</span></div>
-                <div>canvas图纸总数: <span>{{canvas_blueprint}}</span></div>
-                <div>图片图纸总数: <span>{{img_blueprint}}</span></div>
+<!--                <div>canvas图纸总数: <span>{{canvas_blueprint}}</span></div>-->
+<!--                <div>图片图纸总数: <span>{{img_blueprint}}</span></div>-->
             </div>
         </div>
         <div class="message_list">
@@ -29,10 +29,14 @@
     name: "PersonalCenter",
     data() {
       return {
+        user_data: {},
         list: {
-          "用户名": "avatar",
-          "邮箱地址": "liu1355866631@gmail.com",
-          "注册时间": "2023-5-3",
+          // "用户名": this.$store.state.user_data.username,
+          // "邮箱地址": this.$store.state.user_data.email,
+          // "注册时间": this.$store.state.user_data.time,
+          "用户名": JSON.parse(localStorage.getItem('user_data')).username,
+          "邮箱地址": JSON.parse(localStorage.getItem('user_data')).email,
+          "注册时间": JSON.parse(localStorage.getItem('user_data')).time,
 
         }
       }
@@ -41,7 +45,9 @@
       // 修改
       modifyIt(name, value) {
         let message = prompt(`请输入修改后的${name}:`);
-        message = message.trim();
+        if (message === null) {
+          return; // 取消操作
+        }
         // 如果内容为空，则不做处理
         if (!message) {
           alert("输入内容为空")
@@ -50,10 +56,22 @@
           alert("与原信息相同，禁止修改")
           return;
         }
-        modifyIt(name, value).then(res => {
+        const id = this.localStorage.getItem('username')
+        console.log(id)
+        // name 是用户名， value 是修改的内容
+        modifyIt(name, value, id).then(res => {
+          // console.log()
           console.log(res)
         })
       },
+    },
+    created() {
+      // this.user_data =
+      // console.log(this.user_data);
+      // console.log(this.user_data.username)
+    },
+    mounted() {
+
     }
   }
 </script>
