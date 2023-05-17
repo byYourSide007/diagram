@@ -11,13 +11,14 @@
                 <span>{{item.name}}</span>
                 <span>{{item.size}}</span>
                 <span>{{item.type}}</span>
-                <button>下载</button>
+                <button @click="downloadIt">下载</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import {getBlueprint} from "../../request/home.js"
   export default {
     name: "BluePrint",
     data() {
@@ -44,6 +45,13 @@
             size: "54.1K",
             type: 'jpg'
           },
+          {
+            id: 4,
+            img: "http://121.4.13.126:3009/blueprint/电气图纸2.jpg",
+            name: "电气图纸2",
+            size: "21.4K",
+            type: 'jpg'
+          },
         ]
       }
     },
@@ -54,7 +62,8 @@
         this.fileType = file.type;
         this.fileExtension = this.fileType.split('/').pop();
       },
-      // uploadFile() {
+      uploadFile() {
+        // alert("上传成功")
       //   const formData = new FormData();
       //   formData.append('file', this.file);
       //
@@ -67,7 +76,20 @@
       //   }).catch(error => {
       //     console.log(error);
       //   });
-      // }
+      },
+      downloadIt() {
+        getBlueprint().then(res => {
+          const { data } = res;
+          const url = window.URL.createObjectURL(new Blob([data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.target = '_self';
+          link.setAttribute('download', `电气图纸2.jpg`);
+          document.body.appendChild(link);
+          link.click();
+        })
+
+      }
     }
 
   }

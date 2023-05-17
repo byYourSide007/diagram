@@ -64,7 +64,11 @@
       // 用于切换被选中的选项
       isChecked(title, route) {
         console.log(route)
-        this.$router.push('/profile/'+ route)
+        if (route === 'message') {
+          this.$router.push('/profile')
+        }else {
+          this.$router.push('/profile/'+ route)
+        }
         this.title = title;
         this.checkedTitle = title;
       }

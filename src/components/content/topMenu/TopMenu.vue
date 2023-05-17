@@ -16,7 +16,7 @@
             </template>
             <!-- 右侧内容区 -->
             <template #right>
-                <img src="@/assets/topSide/avatar.svg"
+                <img :src="avatar"
                      alt="avatar"
                      style="height: 100%"
                      @click="showProfile">
@@ -30,7 +30,9 @@
   export default {
     name: "TopMenu",
     data() {
-
+        return {
+          avatar: this.$store.state.user_data.avatar?this.$store.state.user_data.avatar: 'http://121.4.13.126:3009/img/avatar.svg'
+        }
     },
     components: {
       SidesMenu

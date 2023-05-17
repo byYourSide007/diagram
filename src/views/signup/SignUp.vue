@@ -187,6 +187,7 @@
             if (status === 0) {
               // 如果是成功的响应
               alert(data.message)
+              this.$router.push('/login')
             }else {
               // 如果是失败的响应
               alert(data.message)

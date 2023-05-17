@@ -213,6 +213,7 @@
         const stageJSON = stage.toJSON()
 
         console.log(stageJSON)
+        console.log(stageJSON.length)
         if (this.$store.state.isLogin) {
           sendStage(stageJSON)
 
@@ -228,12 +229,12 @@
       }
     },
     mounted() {
-      const layer = this.$refs.layer.getStage();
-        prompt("请输入保存的图纸名称")
-      for (let i = 0; i < 9; i++) {
-        layer.add(this.line[i]);
-        layer.draw();
-      }
+      // const layer = this.$refs.layer.getStage();
+      //   alert("图纸成功上传")
+      // for (let i = 0; i < 9; i++) {
+      //   layer.add(this.line[i]);
+      //   layer.draw();
+      // }
     }
   }
 </script>

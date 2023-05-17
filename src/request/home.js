@@ -18,3 +18,11 @@ export function sendStage(data) {
     }
   })
 }
+
+export function getBlueprint() {
+  return request({
+    method: "GET",
+    url: "/getBlueprint",
+    responseType: 'blob'
+  })
+}

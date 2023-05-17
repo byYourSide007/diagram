@@ -12,6 +12,7 @@
 
 
     <div class="search" style="display: none">
+<!--    <div class="search" >-->
       <div class="result_item"
            v-for="item in searchResult"
            :key="item.name">
@@ -35,19 +36,24 @@ export default {
   data() {
     return {
       searchResult: [
+        // {
+        //   "name": "transform",
+        //   "translate_name": "变压器",
+        //   "category": "高压元件"
+        // },
+        // {
+        //   "name": "selfTransformer",
+        //   "translate_name": "互感器",
+        //   "category": "高压元件"
+        // },
+        // {
+        //   "name": "threeItemTransformer",
+        //   "translate_name": "三向变压器",
+        //   "category": "高压元件"
+        // },
         {
-          "name": "transform",
-          "translate_name": "变压器",
-          "category": "高压元件"
-        },
-        {
-          "name": "selfTransformer",
-          "translate_name": "互感器",
-          "category": "高压元件"
-        },
-        {
-          "name": "threeItemTransformer",
-          "translate_name": "三向变压器",
+          "name": "DoublePowerSwitchAllOn",
+          "translate_name": "双电源开关",
           "category": "高压元件"
         },
       ],
@@ -69,6 +75,8 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$store.state.user_data)
+
     this.compsElectricList.push(new Konva.Line({
       points: [0, 0, 100, 100],
       stroke: 'black',
@@ -105,7 +113,7 @@ export default {
       /*left: calc((100vw - 80vw) / 2);*/
       /*left: 363px;*/
       left: 5px;
-      top: calc((100vw - 90vw) / 2 + 30px);
+      top: calc((100vw - 90vw) / 2 + 10px);
       border-radius: 15px;
 
 

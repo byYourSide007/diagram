@@ -38,7 +38,7 @@ const routes = [
       //   components: PersonalCenter
       // },
       {
-        path: 'message',
+        path: '',
         name: "message",
         component: PersonalCenter
       },
