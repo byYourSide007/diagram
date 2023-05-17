@@ -14,12 +14,17 @@
             <div class="list-item" v-for="(value, key) in list" :key="key">
                 <p>{{key}}: </p>
                 <p>{{value}}</p>
+                <button
+                        :style="{'display': key==='注册时间'?'none':'block'}"
+                        @click="modifyIt(key, value)">修改</button>
             </div>
+
         </div>
     </div>
 </template>
 
 <script>
+  import {modifyIt} from '@/request/profile.js'
   export default {
     name: "PersonalCenter",
     data() {
@@ -32,6 +37,24 @@
         }
       }
     },
+    methods: {
+      // 修改
+      modifyIt(name, value) {
+        let message = prompt(`请输入修改后的${name}:`);
+        message = message.trim();
+        // 如果内容为空，则不做处理
+        if (!message) {
+          alert("输入内容为空")
+          return;
+        }else if (message === value){
+          alert("与原信息相同，禁止修改")
+          return;
+        }
+        modifyIt(name, value).then(res => {
+          console.log(res)
+        })
+      },
+    }
   }
 </script>
 
@@ -99,6 +122,12 @@
             p:nth-child(2) {
                 margin-left: 5px;
                 color: #4aaf51;
+            }
+            button {
+                margin-top: 15px;
+                margin-left: 8px;
+                color: #ee9900;
+                height: 25px;
             }
         }
     }

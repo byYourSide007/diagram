@@ -136,6 +136,8 @@
                   user_data: data.user_data
                 })
 
+              // 本地存储用户信息
+                this.localStorage.setItem('username', data.username)
 
                 // 跳转到首页
                 this.$router.push('/')
