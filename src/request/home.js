@@ -24,7 +24,19 @@ export function sendImgBlueprint(formData){
   return request({
     method: "POST",
     url: '/imgBlueprint',
-    data: formData
+    data: formData,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}
+
+// 获取用户名下所有的图纸
+export function getBlueprintList(username){
+  return request({
+    method: "POST",
+    url: '/getBlueprintList',
+    data: {username},
   })
 }
 
@@ -35,9 +47,19 @@ export function getBlueprint(username, id) {
     method: "GET",
     url: "/getBlueprint",
     data: {
-      username,
       id,
     },
     responseType: 'blob'
+  })
+}
+
+// 获取图纸总数
+export function countBluePrint(username) {
+  return request({
+    method: "POST",
+    url: "/countBluePrint",
+    data: {
+      username,
+    },
   })
 }

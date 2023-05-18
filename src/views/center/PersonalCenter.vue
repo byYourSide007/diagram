@@ -27,12 +27,14 @@
 
 <script>
 import {getAvatar, modifyIt} from '@/request/profile.js'
+import {countBluePrint} from "@/request/home";
   export default {
     name: "PersonalCenter",
     data() {
       return {
         userAvatar: 'http://121.4.13.126:3009/avatar/default.svg', // 初始化为默认头像
         user_data: {},
+        total_blueprint: 0,
         list: {
           // "用户名": this.$store.state.user_data.username,
           // "邮箱地址": this.$store.state.user_data.email,
@@ -78,6 +80,8 @@ import {getAvatar, modifyIt} from '@/request/profile.js'
           }
         })
       },
+
+
       // 获取用户的头像
       getUserAvatar() {
         let username = JSON.parse(localStorage.getItem('user_data')).username;
@@ -93,9 +97,21 @@ import {getAvatar, modifyIt} from '@/request/profile.js'
           console.log(url)
         })
       },
+
+
+      // 获取当前用户名下的图纸总数
+      countUserBlueprint() {
+        let username = JSON.parse(localStorage.getItem('user_data')).username;
+        // console.log(username)
+        countBluePrint(username).then(res => {
+          const number = res.data;
+          this.total_blueprint = number;
+        })
+      }
+
     },
     created() {
-
+      this.countUserBlueprint(); // 获取当前用户名下的图纸总数
     },
     mounted() {
       this.getUserAvatar();// 获取用户头像
