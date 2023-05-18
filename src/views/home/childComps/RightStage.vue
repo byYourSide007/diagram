@@ -2,34 +2,36 @@
     <div class="right_stage" ref="container">
         <button @click="save">保存</button>
 <!--        右侧操作台-->
-        <v-stage :config="stageConfig"
-                 ref="stage"
-                 @mousedown="handleStageMouseDown"
-                 @touchstart="handleStageMouseDown"
-                 >
-            <v-layer ref="layer">
-                    <v-shape v-for="(item, index) in compsElectricListComputed"
-                             :key="index"
-                             :config="item"
-                             @transformend="handleTransformEnd"
-                             >
-                      <v-circle :config="circleConfig"/>
-                    </v-shape>
-              <v-transformer ref="transformer" />
-            </v-layer>
-        </v-stage>
-
-<!--        <v-shape :data="line" :sceneFunc="render"/>-->
+<div class="content" ref="content">
+    <v-stage :config="stageConfig"
+             ref="stage"
+             @mousedown="handleStageMouseDown"
+             @touchstart="handleStageMouseDown"
+    >
+        <v-layer ref="layer">
+            <v-shape v-for="(item, index) in compsElectricListComputed"
+                     :key="index"
+                     :config="item"
+                     @transformend="handleTransformEnd"
+            >
+                <v-circle :config="circleConfig"/>
+            </v-shape>
+            <v-transformer ref="transformer" />
+        </v-layer>
+    </v-stage>
+</div>
     </div>
 </template>
 
 <script>
+  import html2canvas from 'html2canvas'
   import Konva from 'konva';
   import { sendStage } from '../../../request/home.js'
   export default {
     name: "RightStage",
     data() {
       return {
+        dataURL: '',
         line:[
           new Konva.Line({
             points: [0, 100, 0, 250],
@@ -101,7 +103,8 @@
         },
         stageConfig: {
           width: 1000,
-          height: 1000
+          height: 1000,
+          opacity: 1,
         },
         arr: []
       }
@@ -205,20 +208,79 @@
       // 保存 stage 中的相关信息
       save() {
         // 查看是否登录，如果没有登录，则跳转到登录界面
-        if (!this.$store.state.isLogin) {
+        let isLogin = JSON.parse(localStorage.getItem('isLogin')).isLogin;
+        // console.log(isLogin)
+        if (!isLogin) {
           this.$router.push('/')
         }
         // 如果登录，则保存到该用户名下
-        const stage = this.$refs.stage.getStage()
+        const stage = this.$refs.stage.getStage();
+        // const url = stage.toDataURL({ pixelRatio: 1, backgroundColor: 'white' });
+
+        // const pixelRatio = window.devicePixelRatio || 1;
+        // const url = stage.toDataURL({ pixelRatio, backgroundColor: '#fff' });
+        // // console.log(url)
+        // // this.downloadURI(url, 'stage.png');
+        // // this.downloadURI(url, 'stage.jpg');
+        // // console.log(this.dataURLtoFile(url, 'stage.jpg'));
+        //
+        // const data = this.dataURLtoFile(url, 'stage.jpg')
+        // const url_a = window.URL.createObjectURL(new Blob([data]));
+        // const link = document.createElement('a');
+        // link.href = url_a;
+        // link.target = '_self';
+        // link.setAttribute('download', `stage.jpg`);
+        // document.body.appendChild(link);
+        // link.click();
+
+
+        let target = this.$refs.content
+        html2canvas(target, { backgroundColor: '#fff' })
+            .then(canvas => {
+              console.log(canvas)
+              const dataURL = canvas.toDataURL('image/png')
+              this.dataURL = dataURL;
+              const creatDom = document.createElement('a')
+              document.body.appendChild(creatDom)
+              creatDom.href = dataURL
+              creatDom.download = 'stage'
+              creatDom.click()
+            })
+
+
+
+
         const stageJSON = stage.toJSON()
 
-        console.log(stageJSON)
-        console.log(stageJSON.length)
+
+
+        // console.log(stageJSON)
+        // console.log(stageJSON.length)
         if (this.$store.state.isLogin) {
           sendStage(stageJSON)
-
         }
       },
+
+
+      dataURLtoFile(dataurl, filename) {
+        let arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--){
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, {type:mime});
+      },
+
+
+      downloadURI(url, name) {
+        let link = document.createElement('a');
+        link.download = name;
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      },
+
       render(ctx, shape) {
         const layer = shape.getLayer();
         const stage = layer.getStage();

@@ -1,5 +1,6 @@
 <template>
     <div class="profile">
+        <a href="/" class="to-home">首页</a>
         <div class="profile-header">
             {{title}}
         </div>
@@ -103,6 +104,10 @@
             font-weight: 700;
             font-size: 17px;
             border-bottom: 1px solid #e6e7e9;
+            a {
+                text-decoration: none;
+
+            }
         }
 
         .menu {
@@ -117,6 +122,13 @@
         .right-stage {
             width: 100%;
         }
+        .to-home {
+            position: absolute;
+            text-decoration: none;
+            font-weight: 600;
 
+            margin-left: 60px;
+            margin-top: 15px;
+        }
     }
 </style>
