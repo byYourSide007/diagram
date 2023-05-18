@@ -1,7 +1,10 @@
 <template>
     <div class="blueprint">
         <div class="upload">
-            <input type="file" ref="fileInput" @change="handleFileChange">
+            <input type="file"
+                   ref="fileInput"
+                   @change="handleFileChange"
+                   accept="image/*">
             <button @click="uploadFile">上传</button>
         </div>
 
@@ -18,7 +21,7 @@
 </template>
 
 <script>
-    import {getBlueprint} from "../../request/home.js"
+    import {getBlueprint, sendImgBlueprint} from "../../request/home.js"
   export default {
     name: "BluePrint",
     data() {
@@ -56,29 +59,30 @@
       }
     },
     methods: {
+      // 当文件发生改变
       handleFileChange(event) {
         const file = event.target.files[0];
         this.fileName = file.name;
         this.fileType = file.type;
         this.fileExtension = this.fileType.split('/').pop();
       },
+      // 发送到后端 文件
       uploadFile() {
-        // alert("上传成功")
-      //   const formData = new FormData();
-      //   formData.append('file', this.file);
-      //
-      //   axios.post('/api/upload', formData, {
-      //     headers: {
-      //       'Content-Type': 'multipart/form-data'
-      //     }
-      //   }).then(response => {
-      //     console.log(response.data);
-      //   }).catch(error => {
-      //     console.log(error);
-      //   });
+        const formData = new FormData();
+        let file = this.$refs.fileInput.files[0];
+        let username = JSON.parse(localStorage.getItem('user_data')).username;
+
+        formData.append('file', file);
+        formData.append('text', username);
+        sendImgBlueprint(formData).then(res => {
+          console.log(res)
+        })
       },
+      // 下载图纸文件
       downloadIt() {
-        getBlueprint().then(res => {
+        let username = JSON.parse(localStorage.getItem('user_data')).username;
+        // let id = "id"; // 图片的id
+        getBlueprint(username).then(res => {
           const { data } = res;
           const url = window.URL.createObjectURL(new Blob([data]));
           const link = document.createElement('a');
@@ -88,7 +92,6 @@
           document.body.appendChild(link);
           link.click();
         })
-
       }
     }
 

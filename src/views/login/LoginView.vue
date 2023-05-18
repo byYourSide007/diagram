@@ -135,8 +135,8 @@
                   username: data.username, // 用户名进行记录
                   user_data: data.user_data
                 })
-
-                // 本地存储用户信息
+              console.log(this.$store.state.isLogin);
+              // 本地存储用户信息
                 // localStorage.setItem('username', {
                 //   "username": data.username
                 // });
@@ -144,8 +144,14 @@
               // console.log(JSON.parse(localStorage.getItem('username')));
               //   localStorage.setItem('id', data.user_data.id);
 
+              let isLogin = {
+                "isLogin": true,
+              }
+              isLogin = JSON.stringify(isLogin)
+              localStorage.setItem('isLogin', isLogin);
 
-              const data_user = JSON.stringify(data.user_data)
+
+              const data_user = JSON.stringify(data.user_data);
                 localStorage.setItem('user_data', data_user);
                 // 跳转到首页
                 this.$router.push('/')

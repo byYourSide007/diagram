@@ -12,3 +12,14 @@ export function modifyIt(name, message, id) {
     }
   })
 }
+
+// 获取用户头像信息
+export function getAvatar(username) {
+  return request({
+    method: "POST",
+    url: "/getAvatar",
+    data: {
+      username,
+    }
+  })
+}

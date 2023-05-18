@@ -6,6 +6,7 @@ export function request(config) {
     // baseURL: "http://127.4.13.126:3009", // 测试用本地端口，需要加上 http 请求前缀，否则会拼接localhost
     baseURL: "http://121.4.13.126:3009/", // 测试用本地端口，需要加上 http 请求前缀，否则会拼接localhost
     timeout: 5000, // 五秒超时
+    // timeout: 10000, // 五秒超时
     headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}, // 请求头信息
   })
 

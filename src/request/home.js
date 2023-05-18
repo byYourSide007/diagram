@@ -19,10 +19,25 @@ export function sendStage(data) {
   })
 }
 
-export function getBlueprint() {
+// 上传图片类型图纸
+export function sendImgBlueprint(formData){
+  return request({
+    method: "POST",
+    url: '/imgBlueprint',
+    data: formData
+  })
+}
+
+
+// 下载图纸
+export function getBlueprint(username, id) {
   return request({
     method: "GET",
     url: "/getBlueprint",
+    data: {
+      username,
+      id,
+    },
     responseType: 'blob'
   })
 }

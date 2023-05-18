@@ -14,6 +14,10 @@ export default createStore({
       state.isLogin = data.isLogin; // 切换登录状态
       state.username = data.username; // 记录当前登录的用户
       state.user_data = data.user_data;
+    },
+    // 退出登录
+    logout(state) {
+      state.isLogin = false;
     }
   },
   actions: {

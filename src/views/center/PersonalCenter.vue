@@ -2,7 +2,9 @@
     <div class="personal-center">
         <div class="header">
             <div class="header-avatar">
-                <img src="@/assets/personal/avatar_female.svg" alt="avatar">
+<!--                <img ：src="@/assets/personal/avatar_female.svg"-->
+                <img :src="userAvatar"
+                     alt="avatar">
             </div>
             <div class="logo">
                 <div>图纸总数: <span>{{total_blueprint}}</span></div>
@@ -15,7 +17,7 @@
                 <p>{{key}}: </p>
                 <p>{{value}}</p>
                 <button
-                        :style="{'display': key==='注册时间'?'none':'block'}"
+                        :style="{'display': key==='time'?'none':'block'}"
                         @click="modifyIt(key, value)">修改</button>
             </div>
 
@@ -24,25 +26,25 @@
 </template>
 
 <script>
-  import {modifyIt} from '@/request/profile.js'
+import {getAvatar, modifyIt} from '@/request/profile.js'
   export default {
     name: "PersonalCenter",
     data() {
       return {
+        userAvatar: 'http://121.4.13.126:3009/avatar/default.svg', // 初始化为默认头像
         user_data: {},
         list: {
           // "用户名": this.$store.state.user_data.username,
           // "邮箱地址": this.$store.state.user_data.email,
           // "注册时间": this.$store.state.user_data.time,
-          "用户名": JSON.parse(localStorage.getItem('user_data')).username,
-          "邮箱地址": JSON.parse(localStorage.getItem('user_data')).email,
-          "注册时间": JSON.parse(localStorage.getItem('user_data')).time,
-
+          "username": JSON.parse(localStorage.getItem('user_data')).username,
+          "email": JSON.parse(localStorage.getItem('user_data')).email,
+          "time": JSON.parse(localStorage.getItem('user_data')).time,
         }
       }
     },
     methods: {
-      // 修改
+      // 修改个人信息
       modifyIt(name, value) {
         let message = prompt(`请输入修改后的${name}:`);
         if (message === null) {
@@ -56,22 +58,48 @@
           alert("与原信息相同，禁止修改")
           return;
         }
-        const id = this.localStorage.getItem('username')
-        console.log(id)
-        // name 是用户名， value 是修改的内容
-        modifyIt(name, value, id).then(res => {
-          // console.log()
-          console.log(res)
+        // 获取用户id
+        const id = JSON.parse(localStorage.getItem('user_data')).id;
+        console.log(id);
+        // name 是类别名字， message 是修改后的内容， id 是用户的id
+        modifyIt(name, message, id).then(res => {
+          const { data } = res;
+          if (data.status) {
+            alert(data.message)
+          }else {
+            // localStorage 修改
+            const user_data =  JSON.parse(localStorage.getItem('user_data'));// 获取本地 localStorage的用户信息
+            user_data[name] = message; // 修改用户信息
+            console.log(user_data)
+            localStorage.setItem('user_data', JSON.stringify(user_data)); // 存储用户信息
+            // 显示修改
+            this.list[name] = message;
+            alert("修改成功！")
+          }
+        })
+      },
+      // 获取用户的头像
+      getUserAvatar() {
+        let username = JSON.parse(localStorage.getItem('user_data')).username;
+        getAvatar(username).then(res => {
+          // 如果返回的头像内容为空，则不赋值
+          const { data } = res;
+          const url = data.url;
+          // 如果内容为空，则不做处理
+          if (!url) {
+            return;
+          }
+          this.userAvatar = url
+          console.log(url)
         })
       },
     },
     created() {
-      // this.user_data =
-      // console.log(this.user_data);
-      // console.log(this.user_data.username)
+
     },
     mounted() {
-
+      this.getUserAvatar();// 获取用户头像
+      // 获取图纸总数
     }
   }
 </script>
