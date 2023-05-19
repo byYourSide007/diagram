@@ -75,8 +75,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$store.state.user_data)
-
+    // console.log(this.$store.state.user_data)
     this.compsElectricList.push(new Konva.Line({
       points: [0, 0, 100, 100],
       stroke: 'black',

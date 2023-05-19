@@ -63,3 +63,14 @@ export function countBluePrint(username) {
     },
   })
 }
+
+// 获取搜索内容
+export function searchBack(content) {
+  return request({
+    method: "POST",
+    url: "/search",
+    data: {
+      content,
+    },
+  })
+}

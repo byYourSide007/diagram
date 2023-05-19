@@ -1,9 +1,11 @@
 <template>
     <div class="left_menu">
         <!-- 搜索框（保留项目） -->
-        <div class="search">
-            <input type="text" placeholder="Search"><span>搜索</span>
-        </div>
+<!--        <div class="search">-->
+<!--            <input type="text" placeholder="Search">-->
+<!--          <button>搜索</button>-->
+<!--        </div>-->
+      <search-view/>
         <!-- 展示电气原件 -->
         <div class="electrical_components">
 <!--            <collapse-list title="电阻"-->
@@ -44,12 +46,14 @@
   // 导入自定义组件
   import CollapseList from "@/components/common/collapse/CollapseList";
   import { eComps } from "@/request/home";
+  import SearchView from "@/views/home/childComps/SearchView";
 
   export default {
     name: "LeftMenu",
     data() {
       return {
         electricListComps: [],// 左侧菜单栏存储的数据
+
         // 渲染数据
         transformer: [], // 基础元件
         HighVoltageComponents: [], // 高压元件
@@ -62,6 +66,7 @@
       }
     },
     components: {
+      SearchView,
       CollapseList, // 列表
     },
     methods: {
@@ -70,8 +75,8 @@
         eComps().then((res) => {
           // console.log(res)
           const { data } = res;
-          const test = data[0].list;
-          console.log(typeof test)
+          // const test = data[0].list;
+          // console.log(typeof test)
           this.electricListComps = data;
         })
       },
@@ -370,34 +375,40 @@
       this.drawInstruments();// 绘制仪器
       this.drawPower();// 绘制电源
       this.drawResistance(); // 绘制电阻
-
       this.getElectricComps();
-    }
+    },
   }
 </script>
 
 <style scoped lang="scss">
+    .left_menu::-webkit-scrollbar {
+      width: 1px;
+    }
     .left_menu {
         position: relative;
         width: 363px;
         height: 100%;
         background-color: #fff;
         /* 搜索框 */
-        .search {
-            display: flex;
-            height: 30px;
-            line-height: 30px;
-            /*width: 80%;*/
-            input {
-                height: 70%;
-                width: 80%;
-                margin-left: 15px;
-                border-radius: 10px;
-            }
-            span {
-                margin-left: 3px;
-            }
-        }
+        //.search {
+        //    display: flex;
+        //    height: 30px;
+        //    line-height: 30px;
+        //    /*width: 80%;*/
+        //    input {
+        //        height: 70%;
+        //        width: 80%;
+        //        margin-left: 15px;
+        //        border-radius: 10px;
+        //    }
+        //    span {
+        //        margin-left: 3px;
+        //    }
+        //  button {
+        //    margin-top: 3px;
+        //    height: 80%;
+        //  }
+        //}
         /* 电气原件列表 */
         .electrical_components {
             position: relative;

@@ -208,10 +208,18 @@
       // 保存 stage 中的相关信息
       save() {
         // 查看是否登录，如果没有登录，则跳转到登录界面
-        let isLogin = JSON.parse(localStorage.getItem('isLogin')).isLogin;
-        // console.log(isLogin)
+        let isLogin = JSON.parse(localStorage.getItem('isLogin'));
         if (!isLogin) {
-          this.$router.push('/')
+          alert("你还未登录，请先登录！");
+          this.$router.push('/login');
+          return;
+        }else {
+          isLogin = isLogin.isLogin;
+        }
+        if (!isLogin) {
+          alert("你还未登录，请先登录！");
+          this.$router.push('/login');
+          return;
         }
         // 如果登录，则保存到该用户名下
         const stage = this.$refs.stage.getStage();
@@ -260,7 +268,6 @@
           sendStage(stageJSON)
         }
       },
-
 
       dataURLtoFile(dataurl, filename) {
         let arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],

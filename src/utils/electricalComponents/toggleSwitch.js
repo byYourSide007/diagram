@@ -2226,6 +2226,11 @@ class DrawCanvas {
         // 绘制前面的横线
         context.beginPath ()
         context.strokeStyle = '#000'
+
+        context.moveTo (x+10, y+10)
+        context.lineTo (x+20, y+21)
+        context.stroke ()
+
         context.moveTo (x, y)
         context.lineTo (x + 30, y)
         context.stroke ()

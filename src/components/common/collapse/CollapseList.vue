@@ -88,6 +88,9 @@
         return str; // 将处理完成的字符串反馈
       }
     },
+    mounted() {
+      // console.log(this.componentList);
+    }
 
   }
 </script>
