@@ -18,6 +18,8 @@ export default createStore({
     // 退出登录
     logout(state) {
       state.isLogin = false;
+      state.username = '';
+      state.user_data = {};
     }
   },
   actions: {

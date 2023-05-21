@@ -24,6 +24,13 @@
     position: relative;
     width: 100vw;
     height: 100vh;
+
+    /*background-image:  url("../../assets/bg2.jpg");*/
+    /*background-image:  url("./assets/bg1.jpg");*/
+    background-image:  url("http://121.4.13.126:3009/img/bg-about.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
   }
 
 </style>

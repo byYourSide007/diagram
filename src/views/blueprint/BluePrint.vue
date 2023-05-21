@@ -79,6 +79,7 @@
         formData.append('text', username);
         sendImgBlueprint(formData).then(res => {
           console.log(res)
+          this.getBlueprintList();
         })
       },
 
@@ -96,7 +97,6 @@
           link.click();
         })
       },
-
       // 获取当前用户下的所有图纸
       getBlueprintList() {
         let username = JSON.parse(localStorage.getItem('user_data')).username;
@@ -110,8 +110,6 @@
           this.blueprint_list = data.list;
         })
       },
-
-
     },
     created() {
       this.getBlueprintList(); // 获取当前用户名下所有的图纸列表
@@ -135,6 +133,13 @@
         padding: 12px 15px;
         border-radius: 15px;
         margin-right: 150px;
+
+
+        /*background: radial-gradient(circle, #e6e9f0, #eef1f5);*/
+        background: radial-gradient(circle, #74ebd5, #9face6);
+
+
+
         .introduce {
             display: flex;
             flex-flow: column nowrap;

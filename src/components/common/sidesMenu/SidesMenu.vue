@@ -17,7 +17,7 @@
             <!-- 登录后显示的内容 -->
             <div class="list_menu" :style="{display: this.isClickHeader?(this.haveLogin?'block':'none'):'none'}">
                 <div class="list_menu_item" @click="profileCenter">个人中心</div>
-                <div class="list_menu_item">退出</div>
+                <div class="list_menu_item" @click="logout">退出</div>
             </div>
         </div>
     </div>
@@ -57,7 +57,18 @@
       // 跳转到个人中心
       profileCenter() {
         this.$router.push('/profile')
-      }
+      },
+      // 退出
+      logout() {
+        // 由于该功能界面显示是在登陆后，也就是 localStorage.getItem('isLogin') 一定能够获得值
+        let isLogin = JSON.parse(localStorage.getItem('isLogin'));
+        isLogin['isLogin'] = false;
+        isLogin = JSON.stringify(isLogin);
+        localStorage.setItem('isLogin', isLogin); // localStorage非登录状态
+        localStorage.removeItem('user_data');
+
+        this.$store.commit('logout'); // Vuex取消登录状态
+      },
     },
   }
 </script>
@@ -86,6 +97,13 @@
             position: relative;
             display: flex;
             flex-flow: column nowrap;
+
+
+            img {
+                height: 100%;
+                border-radius: 50%;
+            }
+
             margin-right: 10px;
             .list_menu {/* 显示的菜单栏 */
                 /* 自身位置 */
@@ -123,6 +141,8 @@
                     }
                 }
             }
+
+
         }
     }
 </style>

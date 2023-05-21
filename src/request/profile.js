@@ -23,3 +23,23 @@ export function getAvatar(username) {
     }
   })
 }
+
+// 发送留言信息
+export function publishMsg(user_id, comment) {
+  return request({
+    method: "POST",
+    url: "/publish",
+    data: {
+      user_id,// 用户 id
+      comment, // 评论信息
+    }
+  })
+}
+
+// 获取所有的留言信息
+export function getComment() {
+  return request({
+    method: "get",
+    url: "/getComment",
+  })
+}

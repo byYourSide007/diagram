@@ -7,6 +7,8 @@ import PersonalCenter from "../views/center/PersonalCenter.vue";
 import BluePrint from "../views/blueprint/BluePrint.vue";
 import SettingsConfig from "../views/settings/SettingsConfig.vue";
 import HelpView from "@/views/help/HelpView";
+import AboutView from "@/views/about/AboutView";
+import CommentView from "@/views/comment/CommentView";
 
 const routes = [
   {
@@ -56,7 +58,17 @@ const routes = [
         path: 'help',
         name: 'help',
         component: HelpView
-      }
+      },
+      {
+        path: 'about',
+        name: 'about',
+        component: AboutView
+      },
+      {
+        path: 'comment',
+        name: 'comment',
+        component: CommentView
+      },
     ]
   }
 

@@ -13,7 +13,9 @@
             </div>
         </div>
         <div class="message_list">
-            <div class="list-item" v-for="(value, key) in list" :key="key">
+            <div class="list-item"
+                 v-for="(value, key) in list"
+                 :key="key">
                 <p>{{key}}: </p>
                 <p>{{value}}</p>
                 <button
@@ -36,11 +38,10 @@ import {countBluePrint} from "@/request/home";
         user_data: {},
         total_blueprint: 0,
         list: {
-          // "用户名": this.$store.state.user_data.username,
-          // "邮箱地址": this.$store.state.user_data.email,
-          // "注册时间": this.$store.state.user_data.time,
           "username": JSON.parse(localStorage.getItem('user_data')).username,
           "email": JSON.parse(localStorage.getItem('user_data')).email,
+          'age': JSON.parse(localStorage.getItem('user_data')).age,
+          'gender': JSON.parse(localStorage.getItem('user_data')).gender,
           "time": JSON.parse(localStorage.getItem('user_data')).time,
         }
       }

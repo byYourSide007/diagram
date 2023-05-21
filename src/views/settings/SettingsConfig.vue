@@ -139,8 +139,8 @@ import {checkPsw, updatePsw, updateAvatar} from "@/request/setting.js"
     .list {
       display: flex;
       flex-flow: column nowrap;
-      margin-top: 50px;
-      overflow: scroll;
+      margin-top: 30px;
+      /*overflow: scroll;*/
 
       .list_item {
         display: flex;
@@ -153,6 +153,7 @@ import {checkPsw, updatePsw, updateAvatar} from "@/request/setting.js"
 
         .list_item_name {
           color: #38c979;
+          font-weight: 600;
           padding: 3px 5px;
         }
 

@@ -9,6 +9,9 @@
 <!--      <button>搜索</button>-->
 <!--    搜索结果   -->
       <div class="result" v-show="isSearching">
+          <div class="result-item" v-if="!hasMsg">
+              <p>未找到相关内容</p>
+          </div>
         <div class="result-item"
              v-for="item in searchResult"
              :key="item.id">
@@ -27,26 +30,8 @@ export default {
   data() {
     return {
       isSearching: false, // 如果用户正在搜索
-      searchResult: [
-        {
-          id: 1,
-          name: 'ammeter',
-          translate: '电流表',
-          category: '仪器'
-        },
-        {
-          id: 1,
-          name: 'ammeter',
-          translate: '电流表',
-          category: '仪器'
-        },
-        {
-          id: 1,
-          name: 'ammeter',
-          translate: '电流表',
-          category: '仪器'
-        }
-      ], // 存储搜索结果
+      hasMsg: true,
+      searchResult: [], // 存储搜索结果
     }
   },
   methods: {
@@ -65,10 +50,22 @@ export default {
       // 获取用户名
       // const username = JSON.parse(localStorage.getItem('user_data')).username;
       searchBack(searchContent).then(res => {
-        console.log(res);
+        const { data } = res;
+        console.log(data);
+        if (data.status) {
+            this.hasMsg = false;
+            this.searchResult = [];
+            return;
+        }
+        console.log("running")
+        this.hasMsg = true;
+        this.searchResult = data.message;
+
       })
-    }
-  }
+    },
+
+  },
+
 }
 </script>
 

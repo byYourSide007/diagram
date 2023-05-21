@@ -10,9 +10,7 @@
     </div>
 
 
-
     <div class="search" style="display: none">
-<!--    <div class="search" >-->
       <div class="result_item"
            v-for="item in searchResult"
            :key="item.name">

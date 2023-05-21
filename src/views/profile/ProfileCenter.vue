@@ -43,6 +43,11 @@
             avatar: 'http://121.4.13.126:3009/img/Profile.svg', // 头像地址
           },
           {
+            title: '留言反馈', //
+            route: 'comment',
+            avatar: 'http://121.4.13.126:3009/img/读者留言.svg', // 头像地址
+          },
+          {
             title: '图纸', //
             route: 'blueprint',
             avatar: 'http://121.4.13.126:3009/img/blueprint.svg', // 头像地址
@@ -57,6 +62,12 @@
             route: 'settings',
             avatar: 'http://121.4.13.126:3009/img/setting.svg', // 头像地址
           },
+          {
+            title: '关于', //
+            route: 'about',
+            avatar: 'http://121.4.13.126:3009/img/aboutus.svg', // 头像地址
+          },
+
         ],
         checkedTitle: '个人中心'
       }
@@ -94,9 +105,29 @@
         display: flex;
         flex-flow: column nowrap;
 
+        /*background-image:  url("../../assets/bg2.jpg");*/
+        /*background-repeat: no-repeat;*/
+        /*background-attachment: fixed;*/
+        /*background-size: cover;*/
+
+
+        /*background: linear-gradient(to right, #ff0000, #0000ff);*/
+        /*background: radial-gradient(circle, #ff0000, #0000ff);*/
+        /*background: radial-gradient(circle, #00cdac, #8ddad5);*/
+        /*background: radial-gradient(circle, #fbc2eb, #a6c1ee);*/
+        background: radial-gradient(circle, #74ebd5, #9face6);
+        /*background: radial-gradient(circle, #8ddad5, #00cdac);*/
+        /*background: linear-gradient(to right, #ff0000, #00ff00, #0000ff);*/
+
+
+
         .profile-header {
             height: 50px;
-            background-color: #f7f7f7;
+            /*background-color: #f7f7f7;*/
+
+            /*background: radial-gradient(circle, #00cdac, #8ddad5);*/
+            background: radial-gradient(circle, #9face6, #74ebd5);
+
 
             /* 设置文本样式 */
             text-align: center;
