@@ -71,13 +71,11 @@
           }
           this.getCommentMsg();
         })
-
       },
       // 获取评论信息
       getCommentMsg() {
         getComment().then(res => {
           const { data } = res;
-          console.log(data)
           this.commentList = data.message;
         })
       }

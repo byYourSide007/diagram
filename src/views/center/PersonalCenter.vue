@@ -102,9 +102,9 @@ import {countBluePrint} from "@/request/home";
 
       // 获取当前用户名下的图纸总数
       countUserBlueprint() {
-        let username = JSON.parse(localStorage.getItem('user_data')).username;
+        let user_id = JSON.parse(localStorage.getItem('user_data')).id;
         // console.log(username)
-        countBluePrint(username).then(res => {
+        countBluePrint(user_id).then(res => {
           const number = res.data;
           this.total_blueprint = number;
         })

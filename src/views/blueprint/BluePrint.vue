@@ -44,10 +44,10 @@
       uploadFile() {
         const formData = new FormData();
         let file = this.$refs.fileInput.files[0];
-        let username = JSON.parse(localStorage.getItem('user_data')).username;
-        console.log(username)
+        // let username = JSON.parse(localStorage.getItem('user_data')).username;
+        let user_id = JSON.parse(localStorage.getItem('user_data')).id;
         formData.append('file', file);
-        formData.append('text', username);
+        formData.append('text', user_id);
         sendImgBlueprint(formData).then(res => {
           console.log(res)
           this.getBlueprintList();
@@ -56,22 +56,25 @@
 
       // 下载图纸文件
       downloadIt(item) {
-        const id = item.id;
+        const id = item.id; // 图纸 id
         getBlueprint(id).then(res => {
           const { data } = res;
           const url = window.URL.createObjectURL(new Blob([data]));
           const link = document.createElement('a');
           link.href = url;
           link.target = '_self';
-          link.setAttribute('download', `${item.file_name}.${item.file_type}`);
+          const name = `${item.file_name.trim()}.${item.file_type}`;
+          console.log(name)
+          // link.setAttribute('download', `${item.file_name}.${item.file_type}`);
+          link.setAttribute('download', `${name}`);
           document.body.appendChild(link);
           link.click();
         })
       },
       // 获取当前用户下的所有图纸
       getBlueprintList() {
-        let username = JSON.parse(localStorage.getItem('user_data')).username;
-        getBlueprintList(username).then(res => {
+        let user_id = JSON.parse(localStorage.getItem('user_data')).id;
+        getBlueprintList(user_id).then(res => {
           const { data } = res;
           const status = data.status;
           if (status) {

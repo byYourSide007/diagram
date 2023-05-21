@@ -229,7 +229,6 @@
         let target = this.$refs.content;
         html2canvas(target, { backgroundColor: '#fff' })
             .then(canvas => {
-              // console.log(canvas)
               const dataURL = canvas.toDataURL(`image/${this.saveImgExtension}`)
               this.dataURL = dataURL;
               const creatDom = document.createElement('a')
@@ -327,6 +326,8 @@
     }
     /* 弹出输入框内容 */
     .alertInputCard {
+        position: absolute;
+        z-index: 999;
         /*position: relative;*/
         /*position: absolute;*/
         background-color: #eee;
@@ -337,7 +338,8 @@
         height: 50%;
         border-radius: 15px;
         padding: 8px 10px;
-        margin: 0 auto;
+        /*margin: 0 auto;*/
+        left: calc(25% );
 
         .alertInputCardItem {
             /*margin-top: 50px;*/

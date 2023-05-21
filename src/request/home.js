@@ -32,11 +32,11 @@ export function sendImgBlueprint(formData){
 }
 
 // 获取用户名下所有的图纸
-export function getBlueprintList(username){
+export function getBlueprintList(user_id){
   return request({
     method: "POST",
     url: '/getBlueprintList',
-    data: {username},
+    data: {user_id},
   })
 }
 
@@ -54,12 +54,12 @@ export function getBlueprint(username, id) {
 }
 
 // 获取图纸总数
-export function countBluePrint(username) {
+export function countBluePrint(user_id) {
   return request({
     method: "POST",
     url: "/countBluePrint",
     data: {
-      username,
+      user_id,
     },
   })
 }
