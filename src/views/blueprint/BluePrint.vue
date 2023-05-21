@@ -29,36 +29,7 @@
     name: "BluePrint",
     data() {
       return {
-        blueprint_list: [
-          // {
-          //   id: 1,
-          //   img: "http://121.4.13.126:3009/blueprint/互锁电路图.jpg",
-          //   name: "互锁电路图",
-          //   size: "4.9K",
-          //   type: 'jpg'
-          // },
-          // {
-          //   id: 2,
-          //   img: "http://121.4.13.126:3009/blueprint/起重机电路图.jpg",
-          //   name: "起重机电路图",
-          //   size: "20.9K",
-          //   type: 'jpg'
-          // },
-          // {
-          //   id: 3,
-          //   img: "http://121.4.13.126:3009/blueprint/住房电路图.jpg",
-          //   name: "住房电路图",
-          //   size: "54.1K",
-          //   type: 'jpg'
-          // },
-          // {
-          //   id: 4,
-          //   img: "http://121.4.13.126:3009/blueprint/电气图纸2.jpg",
-          //   name: "电气图纸2",
-          //   size: "21.4K",
-          //   type: 'jpg'
-          // },
-        ]
+        blueprint_list: []
       }
     },
     methods: {

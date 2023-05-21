@@ -6,6 +6,7 @@
                     class="save_img">保存</button>
         </div>
 
+
         <!--  弹出的输入信息的卡片 -->
         <div class="alertInputCard" v-if="isSaving">
             <div class="alertInputCardItem">
@@ -24,25 +25,28 @@
         </div>
 
 
-<!--        右侧操作台-->
-<div class="content" ref="content">
-    <v-stage :config="stageConfig"
-             ref="stage"
-             @mousedown="handleStageMouseDown"
-             @touchstart="handleStageMouseDown"
-             @contextmenu="drawLines">
-        <v-layer ref="layer">
-            <v-shape v-for="(item, index) in compsElectricListComputed"
-                     :key="index"
-                     :config="item"
-                     @transformend="handleTransformEnd"
-            >
-                <v-circle :config="circleConfig"/>
-            </v-shape>
-            <v-transformer ref="transformer" />
-        </v-layer>
-    </v-stage>
-</div>
+    <!--        右侧操作台-->
+    <div class="content" ref="content">
+        <v-stage :config="stageConfig"
+                 ref="stage"
+                 id="myCanvas"
+                 @mousedown="handleStageMouseDown"
+                 @touchstart="handleStageMouseDown"
+                 @contextmenu="drawLines">
+            <v-layer ref="layer">
+                <v-shape v-for="(item, index) in compsElectricListComputed"
+                         :key="index"
+                         :config="item"
+                         @transformend="handleTransformEnd"
+                >
+<!--                    <v-circle :config="circleConfig"/>-->
+                </v-shape>
+                <v-transformer ref="transformer" />
+            </v-layer>
+        </v-stage>
+    </div>
+
+
     </div>
 </template>
 
@@ -55,71 +59,12 @@
     name: "RightStage",
     data() {
       return {
+        arrow: undefined,
         isSaving: false,// 提示输入内容信息是否显示
         saveImgExtension: 'jpeg', // 保存的文件的拓展名
         saveImgName: 'save', //保存文件的文件名
         dataURL: '',
-        line:[
-          new Konva.Line({
-            points: [0, 100, 0, 250],
-            stroke: 'black',
-            strokeWidth: 2,
-            draggable: true,
-          }),
-          new Konva.Line({
-            points: [0, 100, 0, 250],
-            stroke: 'black',
-            strokeWidth: 2,
-            draggable: true,
-          }),
-          new Konva.Line({
-            points: [0, 0, 100, 0],
-            stroke: 'black',
-            strokeWidth: 2,
-            draggable: true,
-          }),
-          new Konva.Line({
-            points: [0, 0, 100, 0],
-            stroke: 'black',
-            strokeWidth: 2,
-            draggable: true,
-          }),
-          new Konva.Line({
-            points: [0, 0, 100, 0],
-            stroke: 'black',
-            strokeWidth: 2,
-            draggable: true,
-          }),
-          new Konva.Line({
-            points: [100, 0, 220, 0],
-            stroke: 'black',
-            strokeWidth: 2,
-            draggable: true,
-          }),
-          new Konva.Line({
-            points: [100, 0, 220, 0],
-            stroke: 'black',
-            strokeWidth: 2,
-            draggable: true,
-          }),          new Konva.Line({
-            points: [100, 0, 220, 0],
-            stroke: 'black',
-            strokeWidth: 2,
-            draggable: true,
-          }),
-          new Konva.Line({
-            points: [100, 0, 300, 0],
-            stroke: 'black',
-            strokeWidth: 2,
-            draggable: true,
-          }),
-          new Konva.Line({
-            points: [100, 0, 300, 0],
-            stroke: 'black',
-            strokeWidth: 2,
-            draggable: true,
-          }),
-        ],
+        line:[],
         circleConfig: {
           x: 0,
           y: 0,
@@ -172,9 +117,6 @@
     methods: {
       // 转换图形相关的方法
       handleTransformEnd(e) {
-        // shape is transformed, let us save new attrs back to the node
-        // find element in our state
-        // const rect = this.rectangles.find(
         const rect = this.compsElectricListComputed.find(
             (r) => r.name === this.selectedShapeName
         );
@@ -184,9 +126,6 @@
         rect.rotation = e.target.rotation();
         rect.scaleX = e.target.scaleX();
         rect.scaleY = e.target.scaleY();
-
-        // change fill
-        // rect.fill = Konva.Util.getRandomColor();
       },
       // 点击舞台
       handleStageMouseDown(e) {
@@ -219,19 +158,12 @@
         const transformerNode = this.$refs.transformer.getNode();
         const stage = transformerNode.getStage();
         const { selectedShapeName } = this;
-
         const selectedNode = stage.findOne('.' + selectedShapeName);
-        // do nothing if selected node is already attached
-        if (selectedNode === transformerNode.node()) {
-          return;
-        }
-
+        if (selectedNode === transformerNode.node()) {return; }// do nothing if selected node is already attached
         if (selectedNode) {
-          // attach to another node
-          transformerNode.nodes([selectedNode]);
+          transformerNode.nodes([selectedNode]);// attach to another node
         } else {
-          // remove transformer
-          transformerNode.nodes([]);
+          transformerNode.nodes([]);// remove transformer
         }
       },
 
@@ -249,13 +181,8 @@
         }
         // 弹出输入框
         this.isSaving = true; // 显示输入框内容
-
-
-        // 下一个进程中执行
-        // this.$nextTick(() => {
-
-        // })
       },
+
       // 点击弹出框之后，点击确定按钮
       ensureImgMsg() {
         new Promise(resolve => {
@@ -270,6 +197,7 @@
           this.saveContentToImg();
         })
       },
+
       // 检查输入信息的格式
       checkMsg() {
         const fileName = this.$refs.fileName.value;
@@ -295,10 +223,10 @@
         this.saveImgExtension = extension;
         this.saveImgName = fileName;
       },
+
       // 保存图片
       saveContentToImg(){
         let target = this.$refs.content;
-        console.log()
         html2canvas(target, { backgroundColor: '#fff' })
             .then(canvas => {
               // console.log(canvas)
@@ -315,46 +243,58 @@
       },
 
 
-      // 绘制线条
-      drawLines() {
+      // 点击右键，阻止默认事件
+      drawLines(e) {
+        e.evt.preventDefault();
+        const stage = this.$refs.stage.getStage();
+        const layer = this.$refs.layer.getStage();
 
+        let arrow;
+        // 鼠标按下
+        stage.on('mousedown', (e) => {
+          if (e.evt.button !== 2) {
+            return
+          }
+          const pos = stage.getPointerPosition();
+          // arrow = new Konva.Arrow({
+          arrow = new Konva.Line({
+            points: [pos.x, pos.y],
+            stroke: 'black',
+            fill: 'black'
+          });
+          layer.add(arrow);
+          layer.batchDraw();
+        });
+        // 鼠标移动
+        stage.on('mousemove', () => {
+          if (arrow) {
+            const pos = stage.getPointerPosition();
+            const points = [arrow.points()[0], arrow.points()[1], pos.x, pos.y];
+            arrow.points(points);
+            layer.batchDraw();
+          }
+        });
+        // 鼠标右键抬起
+        stage.on('mouseup', () => {
+          arrow = null;
+        });
 
+        layer.draw();
 
-        event.preventDefault(); // 阻止默认右键菜单的弹出
-        document.addEventListener('mousemove', this.onMouseMove);
-
-        // console.log(e)
-
-
-        // // 获取要连接的两个元素
-        // const element1 = document.getElementById('element1');
-        // const element2 = document.getElementById('element2');
-        //
-        // // 获取元素的位置和大小
-        // const rect1 = element1.getBoundingClientRect();
-        // const rect2 = element2.getBoundingClientRect();
-        //
-        // // 计算元素的中心位置
-        // const x1 = rect1.left + rect1.width / 2;
-        // const y1 = rect1.top + rect1.height / 2;
-        // const x2 = rect2.left + rect2.width / 2;
-        // const y2 = rect2.top + rect2.height / 2;
-
-        // // 在 Canvas 上绘制连线
-        // ctx.beginPath();
-        // // ctx.moveTo(x1, y1);
-        // // ctx.lineTo(x2, y2);
-        // ctx.stroke();
       },
-      onMouseMove(e) {
-        console.log(this.$refs.stage.getStage())
-        const ctx = this.$refs.stage.getContext('2d');
-        // console.log(ctx)
 
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(e.screenX, e.screenY);
-        ctx.stroke();
+
+      onMouseMove() {
+        // var canvas = document.getElementById("myCanvas");
+        console.log(this.$refs.stage.getStage())
+        console.log('----------------------------------')
+        const ctx = this.$refs.stage.getContext('2d');
+        console.log(ctx)
+        //
+        // ctx.beginPath();
+        // ctx.moveTo(0, 0);
+        // ctx.lineTo(e.screenX, e.screenY);
+        // ctx.stroke();
       }
 
     },
@@ -375,6 +315,9 @@
         width: 100%;
         /*background-color: red;*/
         border-bottom: 1px solid #eee;
+
+        display: flex;
+        justify-content: flex-end;
 
         .save_img {
             padding: 5px 12px;
